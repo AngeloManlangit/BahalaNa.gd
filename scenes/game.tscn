@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=3 format=3 uid="uid://d4nddivpwn6q6"]
 
 [ext_resource type="PackedScene" uid="uid://jqcngpay0enb" path="res://assets/Player.gltf" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://dwyr6bv1hte1u" path="res://assets/Vince.gltf" id="2_yqjtg"]
 
 [node name="Game" type="Node3D"]
 
@@ -25,4 +26,7 @@ use_collision = true
 size = Vector3(0.064941406, 0.22558594, 0.060058594)
 
 [node name="Player2" parent="." instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37794897, -0.00019335747, 0.6710133)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6467471, 0.04316616, 0.77784944)
+
+[node name="Vince" parent="." instance=ExtResource("2_yqjtg")]
+transform = Transform3D(0.53513396, 0, 0.8447672, 0, 1, 0, -0.8447672, 0, 0.53513396, 0.049391747, 0.8005936, 2.0649366)
