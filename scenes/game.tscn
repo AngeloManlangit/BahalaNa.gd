@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4nddivpwn6q6"]
+
+[ext_resource type="PackedScene" uid="uid://jqcngpay0enb" path="res://assets/Player.gltf" id="1_uwrxv"]
+
+[node name="Game" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.9838349, 0, 0, 0, 1, 0, 0, 0, -1.9838349, 0, -0.007693529, 0)
+use_collision = true
+size = Vector3(10, 0.015, 10)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, 0.19615555, 0.05436386, 2.1829276)
+use_collision = true
+size = Vector3(0.064941406, 0.22558594, 0.060058594)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, 0.19615555, 0.05436386, -0.5718177)
+use_collision = true
+size = Vector3(0.064941406, 0.22558594, 0.060058594)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, 0.19615555, 0.05436386, -3.6230557)
+use_collision = true
+size = Vector3(0.064941406, 0.22558594, 0.060058594)
+
+[node name="Player2" parent="." instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37794897, -0.00019335747, 0.6710133)
