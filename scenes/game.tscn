@@ -31,97 +31,99 @@ left_to_right = 1.0
 
 [node name="Game" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08968134, 1.0768079, 5.083183)
+
+[node name="Map" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
 environment = SubResource("Environment_lbhrr")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 8.205492, 0)
 shadow_enabled = true
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Floor" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-1.9838349, 0, 0, 0, 1, 0, 0, 0, -1.9838349, 0, -0.007693529, 0)
 material_override = SubResource("StandardMaterial3D_lbhrr")
 use_collision = true
 size = Vector3(15.957031, 0.015, 23.34082)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, -4.597464, -0.029292963, -1.154453)
 use_collision = true
 size = Vector3(0.13354492, 0.20166016, 0.11352539)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, -4.231672, 0.5733776, -4.7406983)
 material_override = SubResource("StandardMaterial3D_iywne")
 use_collision = true
 size = Vector3(0.1862793, 0.37402344, 0.18554688)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, -3.9708753, 1.2473272, -10.114534)
 material_override = SubResource("StandardMaterial3D_lnu2h")
 use_collision = true
 size = Vector3(0.22387695, 0.56677246, 0.13842773)
 
-[node name="Player" parent="." instance=ExtResource("2_lnu2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08968134, 1.0768079, 5.083183)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-1.9838349, 0, 0, 0, 1, 0, 0, 0, -1.9838349, -15.710462, 1.015744, 0)
 size = Vector3(0.31689453, 3.046875, 23.55664)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-1.9838349, 0, 0, 0, 1, 0, 0, 0, -1.9838349, 15.436872, 1.015744, 0)
 size = Vector3(0.31689453, 3.046875, 23.55664)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
 transform = Transform3D(8.671618e-08, 0, 1.9838349, 0, 1, 0, -1.9838349, 0, 8.671618e-08, -0.31633484, 1.015744, 23.144308)
 size = Vector3(0.31689453, 3.046875, 16.374939)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map"]
 transform = Transform3D(8.671618e-08, 0, 1.9838349, 0, 1, 0, -1.9838349, 0, 8.671618e-08, -0.31633484, 1.015744, -22.653559)
 size = Vector3(0.31689453, 3.046875, 16.374939)
 
-[node name="Vince" parent="." instance=ExtResource("3_lnu2h")]
+[node name="Vince" parent="Map" instance=ExtResource("3_lnu2h")]
 transform = Transform3D(-0.42942387, 0, -0.90310305, 0, 1, 0, 0.90310305, 0, -0.42942387, -8.735819, 0.4998064, 0.91917074)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Map"]
 transform = Transform3D(-1.9838349, 0, 0, 0, 1.9266049, 0, 0, 0, -6.682298, 5.1394014, 0.94339216, 0)
 use_collision = true
 mesh = SubResource("PrismMesh_lnu2h")
 
-[node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Map"]
 transform = Transform3D(1.9838349, 0, 5.8418505e-07, 0, 1.9266049, 0, -1.7343235e-07, 0, 6.682298, 9.518728, 0.94339216, -4.9104834)
 use_collision = true
 mesh = SubResource("PrismMesh_lnu2h")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 9.607737)
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7792754, 0, 7.3096933)
 use_collision = true
 radius = 1.0
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75473, 0.89509964, 11.511994)
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Map"]
+transform = Transform3D(0.835136, 0, 0.5500435, 0, 1, 0, -0.5500435, 0, 0.835136, -5.7200956, 0.89509964, 10.43064)
 use_collision = true
 radius = 1.0
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224747, 1.4210172, 14.630467)
 use_collision = true
 radius = 1.0
 height = 3.5151367
 
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="."]
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.538707, 2.0532193, 17.697395)
 use_collision = true
 radius = 1.0
 height = 4.779541
 
-[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="."]
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4790077, 2.8910432, 15.939667)
 use_collision = true
 radius = 0.75
 height = 6.5544586
 
-[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="."]
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53998804, 3.447497, 13.388834)
 use_collision = true
 height = 7.667366

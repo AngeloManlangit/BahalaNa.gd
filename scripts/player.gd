@@ -1,11 +1,10 @@
 extends CharacterBody3D
 
+# movement variables
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
 const MOUSE_SENSITIVITY = 0.005
-
 const weight = 7.0
-
 var mouse_captured: bool
 
 # for the coyote time
@@ -17,8 +16,12 @@ var jump_available: bool = true
 var jump_buffer: bool = false
 @export var jump_buffer_time: float = 0.2
 
+# head and camera
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera
+
+# items
+@onready var item_animation: AnimationPlayer = $Head/Camera/fan/AnimationPlayer
 
 func _ready():
 	capture_mouse()
@@ -72,10 +75,16 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * weight)
 		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
 	
-	move_and_slide()
+	# using item
+	if Input.is_action_pressed("shoot") and mouse_captured:
+		if !item_animation.is_playing():
+			print("Shooting")
+			item_animation.play("shoot")
 	
+	move_and_slide()
+
 func Jump() -> void:
-	velocity.y = JUMP_VELOCITY
+	velocity.y = JUMP_VELOCITY 
 	jump_available = false
 	
 func on_coyote_timeout():
@@ -91,7 +100,3 @@ func capture_mouse():
 func release_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
-
-
-func _on_coyote_timeout() -> void:
-	pass # Replace with function body.
