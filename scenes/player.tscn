@@ -91,12 +91,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6626097, 0)
 [node name="Camera" type="Camera3D" parent="Head"]
 
 [node name="fan" parent="Head/Camera" instance=ExtResource("3_qhqgy")]
-transform = Transform3D(0.03439697, 0.13052814, -0.17028107, 0.06786028, 0.59301025, 0.03936643, 0.35698295, -0.12530462, 0.008924056, 0.65, -0.65, -0.78)
+transform = Transform3D(0.034396965, 0.13052814, -0.17028107, 0.067860276, 0.59301025, 0.03936643, 0.35698292, -0.12530462, 0.008924056, 0.65, -0.65, -0.78)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera/fan"]
 libraries = {
 &"": SubResource("AnimationLibrary_qlg0r")
 }
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46404567)
+target_position = Vector3(0, 0, -0.6)
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 

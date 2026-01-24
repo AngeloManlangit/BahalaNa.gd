@@ -22,6 +22,10 @@ var jump_buffer: bool = false
 
 # items
 @onready var item_animation: AnimationPlayer = $Head/Camera/fan/AnimationPlayer
+@onready var item_aim: RayCast3D = $Head/Camera/RayCast3D
+
+var windslash = load("res://scenes/windslash.tscn")
+var instance
 
 func _ready():
 	capture_mouse()
@@ -67,7 +71,6 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -80,6 +83,10 @@ func _physics_process(delta: float) -> void:
 		if !item_animation.is_playing():
 			print("Shooting")
 			item_animation.play("shoot")
+			instance = windslash.instantiate()
+			instance.position = item_aim.global_position
+			instance.transform.basis = item_aim.global_transform.basis
+			get_parent().add_child(instance)
 	
 	move_and_slide()
 
