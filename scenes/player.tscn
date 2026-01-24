@@ -26,3 +26,7 @@ shape = SubResource("ConvexPolygonShape3D_qhqgy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6626097, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
+
+[node name="Coyote_Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Coyote_Timer" to="." method="on_coyote_timeout"]

@@ -1,12 +1,21 @@
 extends CharacterBody3D
 
-const SPEED = 10.0
+const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
 const MOUSE_SENSITIVITY = 0.005
 
 const weight = 7.0
 
 var mouse_captured: bool
+
+# for the coyote time
+@export var coyote_time: float = 0.2
+@onready var coyote_timer: Timer = $Coyote_Timer
+var jump_available: bool = true
+
+# for the jump buffer
+var jump_buffer: bool = false
+@export var jump_buffer_time: float = 0.2
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera
@@ -28,43 +37,52 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
+		
+		# for coyote time when jumping
+		if jump_available:
+			if coyote_timer.is_stopped():
+				coyote_timer.start(coyote_time)
+		
 		velocity += get_gravity() * delta
+	else:
+		jump_available = true
+		coyote_timer.stop()
+		
+		if jump_buffer:
+			Jump()
+			jump_buffer = false
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		if jump_available:
+			Jump()
+		else:
+			jump_buffer = true
+			get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	# change between these two for testing (uncomment one and comment the other)
-	# no_intertia(direction, delta)
-	with_intertia(direction, delta)
-	
-	move_and_slide()
-	
-func no_intertia(direction, delta: float):
+
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * weight)
 		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
-		
-func with_intertia(direction, delta: float):
-	if is_on_floor():
-		if direction:
-			velocity.x = direction.x * SPEED
-			velocity.z = direction.z * SPEED
-		else:
-			velocity.x = lerp(velocity.x, direction.x * SPEED, delta * weight)
-			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
-	else:
-		# for inertia mid-air
-		const air_weight: float = 6.0
-		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * air_weight)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * air_weight)
+	
+	move_and_slide()
+	
+func Jump() -> void:
+	velocity.y = JUMP_VELOCITY
+	jump_available = false
+	
+func on_coyote_timeout():
+	jump_available = false
+
+func on_jump_buffer_timeout():
+	jump_buffer = false
 
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -73,3 +91,7 @@ func capture_mouse():
 func release_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
+
+
+func _on_coyote_timeout() -> void:
+	pass # Replace with function body.
