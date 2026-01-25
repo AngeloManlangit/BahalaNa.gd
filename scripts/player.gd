@@ -22,7 +22,9 @@ var jump_buffer: bool = false
 
 # items
 @onready var item_animation: AnimationPlayer = $Head/Camera/fan/AnimationPlayer
-@onready var item_aim: RayCast3D = $Head/Camera/RayCast3D
+@onready var item_aim: RayCast3D = $Head/Camera/Aim
+var fan_jumped: bool = false
+var fan_cooldown_time: float = 0.1
 
 var windslash = load("res://scenes/windslash.tscn")
 var instance
@@ -35,13 +37,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		capture_mouse()
 	if Input.is_key_pressed(KEY_ESCAPE):
 		release_mouse()
-	
+		
 	if mouse_captured and event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
 	# Add the gravity.
 	if not is_on_floor():
 		
@@ -71,25 +73,26 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * weight)
-		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
+	if !fan_jumped:
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = lerp(velocity.x, direction.x * SPEED, delta * weight)
+			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
 	
 	# using item
 	if Input.is_action_pressed("shoot") and mouse_captured:
 		if !item_animation.is_playing():
-			print("Shooting")
 			item_animation.play("shoot")
-			instance = windslash.instantiate()
-			instance.position = item_aim.global_position
-			instance.transform.basis = item_aim.global_transform.basis
-			get_parent().add_child(instance)
+			generate_windslash()
+			if !is_on_floor():
+				# parameter for the power of the backblast
+				fan_blast(10)
 	
 	move_and_slide()
 
+# movement functions
 func Jump() -> void:
 	velocity.y = JUMP_VELOCITY 
 	jump_available = false
@@ -100,6 +103,7 @@ func on_coyote_timeout():
 func on_jump_buffer_timeout():
 	jump_buffer = false
 
+# mouse functions
 func capture_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	mouse_captured = true
@@ -107,3 +111,21 @@ func capture_mouse():
 func release_mouse():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_captured = false
+
+# item functions
+func generate_windslash():
+	instance = windslash.instantiate()
+	instance.position = item_aim.global_position
+	instance.transform.basis = item_aim.global_transform.basis
+	get_parent().add_child(instance)
+	
+func fan_blast(blast_power: float):
+	# for the backward motion
+	velocity.x = -head.basis.x.z * (blast_power / 2)
+	velocity.z = head.basis.x.x * (blast_power / 2)
+	velocity.y = -camera.basis.y.z * blast_power
+	fan_jumped = true
+	get_tree().create_timer(jump_buffer_time).timeout.connect(on_fan_blast_timeout)
+	
+func on_fan_blast_timeout():
+	fan_jumped = false
