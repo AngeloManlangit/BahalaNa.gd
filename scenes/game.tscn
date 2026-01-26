@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=16 format=3 uid="uid://d4nddivpwn6q6"]
 
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://beovagt1dwo1b" path="res://scenes/vince_ball.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://c2qr4p6u8xxje" path="res://scenes/fan.tscn" id="4_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://jxxsnvi2pl5p" path="res://items/boomeranglootdrop_vfx.tscn" id="6_p57ef"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iywne"]
 size = Vector3(1.4609375, 1.9248047, 1.3447266)
@@ -162,3 +163,6 @@ shape = SubResource("BoxShape3D_u5sy4")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("5_p57ef")
+
+[node name="lootdrop_vfx" parent="." instance=ExtResource("6_p57ef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2613, 0.28391337, 5.021278)
