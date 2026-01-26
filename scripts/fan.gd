@@ -16,7 +16,7 @@ func apply_shoot():
 	if !item_animation.is_playing():
 		item_animation.play("shoot")
 		generate_windslash()
-		if !is_on_floor():
+		if !player_body.is_on_floor():
 			# parameter for the power of the backblast
 			fan_blast(10)
 
@@ -28,9 +28,9 @@ func generate_windslash():
 	
 func fan_blast(blast_power: float):
 	# for the backward motion
-	velocity.x = -head.basis.x.z * (blast_power / 2)
-	velocity.z = head.basis.x.x * (blast_power / 2)
-	velocity.y = -camera.basis.y.z * blast_power
+	player_body.velocity.x = -head.basis.x.z * blast_power
+	player_body.velocity.z = head.basis.x.x * blast_power
+	player_body.velocity.y = -camera.basis.y.z * blast_power
 	fan_jumped = true
 	get_tree().create_timer(fan_cooldown_time).timeout.connect(on_fan_blast_timeout)
 	

@@ -127,3 +127,5 @@ height = 6.5544586
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53998804, 3.447497, 13.388834)
 use_collision = true
 height = 7.667366
+
+[node name="AudioManager" type="Node" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d38inaf4yhtfe" path="res://assets/goofy.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://chvc3jetbh6ws" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://c2qr4p6u8xxje" path="res://scenes/fan.tscn" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://bqcwjcp13ando" path="res://scripts/item_scripts.gd" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://cooavnd8bdduu" path="res://scripts/items.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://ba6cx67kj5sca" path="res://scripts/fan.gd" id="5_tuyoq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
@@ -93,7 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6626097, 0)
 [node name="Camera" type="Camera3D" parent="Head"]
 
 [node name="fan" parent="Head/Camera" instance=ExtResource("3_qhqgy")]
-transform = Transform3D(0.034396958, 0.13052814, -0.17028107, 0.06786026, 0.59301025, 0.03936643, 0.35698283, -0.12530462, 0.008924056, 0.65, -0.65, -0.78)
+transform = Transform3D(0.03439695, 0.13052814, -0.17028107, 0.06786024, 0.59301025, 0.03936643, 0.35698274, -0.12530462, 0.008924056, 0.65, -0.65, -0.78)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Camera/fan"]
 libraries = {
@@ -106,10 +106,10 @@ target_position = Vector3(0, 0, -0.6)
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 
-[node name="Item_Scripts" type="Node" parent="."]
+[node name="Items" type="Node3D" parent="."]
 script = ExtResource("4_qlg0r")
 
-[node name="Fan" type="Node" parent="Item_Scripts"]
+[node name="Fan" type="Node3D" parent="Items"]
 script = ExtResource("5_tuyoq")
 
 [connection signal="timeout" from="Coyote_Timer" to="." method="on_coyote_timeout"]

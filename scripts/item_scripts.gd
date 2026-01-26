@@ -1,2 +1,0 @@
-class_name Items
-extends CharacterBody3D
