@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbcsaqa08rnq3"]
+[gd_scene load_steps=13 format=3 uid="uid://cbcsaqa08rnq3"]
 
 [ext_resource type="Texture2D" uid="uid://d38inaf4yhtfe" path="res://assets/goofy.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://chvc3jetbh6ws" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://c2qr4p6u8xxje" path="res://scenes/fan.tscn" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://dpvvi4yo2i3tk" path="res://scenes/hand_rope.tscn" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://dywecgyuaavbf" path="res://assets/temp_models/crosshair.png" id="5_fjrip"]
+[ext_resource type="Script" uid="uid://dvyx65gu52fkr" path="res://scripts/sticky_hand_controller.gd" id="5_tuyoq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
 albedo_texture = ExtResource("1_3vyb7")
@@ -75,17 +78,12 @@ _data = {
 &"shoot": SubResource("Animation_qhqgy")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qhqgy"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhqgy"]
-albedo_color = Color(1, 0, 1, 1)
-
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_g2els")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_g2els")
 
 [node name="Body_Collider" type="CollisionShape3D" parent="."]
@@ -97,7 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6626097, 0)
 [node name="Camera" type="Camera3D" parent="Head"]
 
 [node name="fan" parent="Head/Camera" instance=ExtResource("3_qhqgy")]
-transform = Transform3D(0.03439694, 0.13052814, -0.17028107, 0.06786022, 0.59301025, 0.03936643, 0.35698265, -0.12530462, 0.008924056, 0.65, -0.65, -0.78)
+transform = Transform3D(0.03439693, 0.13052814, -0.17028107, 0.06786021, 0.59301025, 0.03936643, 0.35698256, -0.12530462, 0.008924056, 0.65, -0.65, -0.78)
 
 [node name="Fan_Animation" type="AnimationPlayer" parent="Head/Camera/fan"]
 libraries = {
@@ -105,33 +103,34 @@ libraries = {
 }
 
 [node name="Aim" type="RayCast3D" parent="Head/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46404567)
-target_position = Vector3(0, 0, -0.6)
-
-[node name="Sticky_Hand" type="Area3D" parent="Head"]
-collision_layer = 16
+target_position = Vector3(0, 0, -50)
 collision_mask = 13
 
-[node name="Hand_Model" type="CSGSphere3D" parent="Head/Sticky_Hand"]
-transform = Transform3D(0.19351584, 0, 0, 0, 0.19351584, 0, 0, 0, 0.19351584, 0, 0, 0)
-collision_mask = 16
+[node name="Rope" parent="Head/Camera" instance=ExtResource("4_qlg0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27126157, -0.24065858, -0.572635)
+visible = false
 
-[node name="Sticky_Hand_Collider" type="CollisionShape3D" parent="Head/Sticky_Hand"]
-transform = Transform3D(0.19351584, 0, 0, 0, 0.19351584, 0, 0, 0, 0.19351584, 0, 0, 0)
-shape = SubResource("BoxShape3D_qhqgy")
-
-[node name="Rope" type="Node3D" parent="Head"]
-
-[node name="Rope_Model" type="CSGCylinder3D" parent="Head/Rope"]
-transform = Transform3D(0.09286904, 0, 0, 0, -4.059435e-09, -0.09286904, 0, 0.09286904, -4.059435e-09, 0, 0, 0)
-radius = 0.25
-height = 3.498
-sides = 4
-material = SubResource("StandardMaterial3D_qhqgy")
+[node name="Crosshair" type="TextureRect" parent="Head/Camera"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_fjrip")
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 
-[connection signal="area_entered" from="Head/Sticky_Hand" to="." method="on_hand_attached"]
-[connection signal="body_entered" from="Head/Sticky_Hand" to="." method="on_hand_attached"]
-[connection signal="body_exited" from="Head/Sticky_Hand" to="." method="on_hand_free"]
+[node name="StickyHandController" type="Node" parent="." node_paths=PackedStringArray("ray", "rope")]
+script = ExtResource("5_tuyoq")
+ray = NodePath("../Head/Camera/Aim")
+rope = NodePath("../Head/Camera/Rope")
+
 [connection signal="timeout" from="Coyote_Timer" to="." method="on_coyote_timeout"]
