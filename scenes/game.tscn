@@ -3,12 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://beovagt1dwo1b" path="res://scenes/vince_ball.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://c2qr4p6u8xxje" path="res://scenes/fan.tscn" id="4_iywne"]
+[ext_resource type="PackedScene" uid="uid://csm0g4hjajgt5" path="res://scenes/pickup_fan.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
-[ext_resource type="PackedScene" uid="uid://jxxsnvi2pl5p" path="res://items/boomeranglootdrop_vfx.tscn" id="6_p57ef"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iywne"]
+<<<<<<< HEAD
 size = Vector3(1.46094, 1.9248, 1.34473)
+=======
+size = Vector3(1.453125, 2.2949219, 1)
+>>>>>>> a5abbad5428b981ec3b8a1f414c1dbf6ac0ec309
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqjtg"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -32,18 +35,30 @@ albedo_texture = ExtResource("1_yqjtg")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnu2h"]
 albedo_color = Color(0.717092, 0.0433023, 0.691042, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p57ef"]
+albedo_color = Color(0, 0.58961904, 0.14328283, 1)
+
 [sub_resource type="PrismMesh" id="PrismMesh_lnu2h"]
 left_to_right = 1.0
 
+<<<<<<< HEAD
 [sub_resource type="BoxShape3D" id="BoxShape3D_u5sy4"]
 size = Vector3(2.04297, 1.1123, 1)
+=======
+[sub_resource type="BoxShape3D" id="BoxShape3D_p57ef"]
+size = Vector3(1.6679688, 1.1005859, 1)
+>>>>>>> a5abbad5428b981ec3b8a1f414c1dbf6ac0ec309
 
 [node name="Game" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 unique_name_in_owner = true
+<<<<<<< HEAD
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0896813, 1.07681, 5.08318)
 collision_layer = 2
+=======
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08968134, 1.0768079, 5.083183)
+>>>>>>> a5abbad5428b981ec3b8a1f414c1dbf6ac0ec309
 collision_mask = 13
 
 [node name="Pickup_Area" type="Area3D" parent="Player"]
@@ -51,7 +66,10 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="Pickup_Collider" type="CollisionShape3D" parent="Player/Pickup_Area"]
+<<<<<<< HEAD
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0860249, 0)
+=======
+>>>>>>> a5abbad5428b981ec3b8a1f414c1dbf6ac0ec309
 shape = SubResource("BoxShape3D_iywne")
 
 [node name="Map" type="Node" parent="."]
@@ -86,7 +104,26 @@ material_override = SubResource("StandardMaterial3D_lnu2h")
 use_collision = true
 size = Vector3(0.223877, 0.566772, 0.138428)
 
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, -11.828469, 7.7385416, -10.114534)
+material_override = SubResource("StandardMaterial3D_p57ef")
+use_collision = true
+size = Vector3(0.58947754, 0.14569092, 0.13842773)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, 6.7645645, 7.7385416, 6.147873)
+material_override = SubResource("StandardMaterial3D_p57ef")
+use_collision = true
+size = Vector3(0.10430908, 0.14569092, 0.13842773)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-13.873013, 0, 0, 0, 6.9930277, 0, 0, 0, -13.873013, 6.7645645, 11.032903, -18.235184)
+material_override = SubResource("StandardMaterial3D_p57ef")
+use_collision = true
+size = Vector3(0.10430908, 1.6863251, 0.13842773)
+
 [node name="CSGBox3D4" type="CSGBox3D" parent="Map"]
+<<<<<<< HEAD
 transform = Transform3D(-1.98383, 0, 0, 0, 1, 0, 0, 0, -1.98383, -15.7105, 1.01574, 0)
 size = Vector3(0.316895, 3.04688, 23.5566)
 
@@ -101,6 +138,26 @@ size = Vector3(0.316895, 3.04688, 16.3749)
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map"]
 transform = Transform3D(8.67162e-08, 0, 1.98383, 0, 1, 0, -1.98383, 0, 8.67162e-08, -0.316335, 1.01574, -22.6536)
 size = Vector3(0.316895, 3.04688, 16.3749)
+=======
+transform = Transform3D(-1.9838349, 0, 0, 0, 3.79973, 0, 0, 0, -1.9838349, -15.710462, 2.4691317, 0)
+use_collision = true
+size = Vector3(0.31689453, 3.046875, 23.55664)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map"]
+transform = Transform3D(-1.9838349, 0, 0, 0, 3.79973, 0, 0, 0, -1.9838349, 15.436872, 2.4691317, 0)
+use_collision = true
+size = Vector3(0.31689453, 3.046875, 23.55664)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
+transform = Transform3D(8.671618e-08, 0, 1.9838349, 0, 3.79973, 0, -1.9838349, 0, 8.671618e-08, -0.31633484, 2.4691317, 23.14431)
+use_collision = true
+size = Vector3(0.31689453, 3.046875, 16.374939)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map"]
+transform = Transform3D(8.671618e-08, 0, 1.9838349, 0, 3.79973, 0, -1.9838349, 0, 8.671618e-08, -0.31633484, 2.4691317, -22.653557)
+use_collision = true
+size = Vector3(0.31689453, 3.046875, 16.374939)
+>>>>>>> a5abbad5428b981ec3b8a1f414c1dbf6ac0ec309
 
 [node name="Vince" parent="Map" instance=ExtResource("3_lnu2h")]
 transform = Transform3D(-0.429424, 0, -0.903103, 0, 1, 0, 0.903103, 0, -0.429424, -8.73582, 0.499806, 0.919171)
@@ -155,14 +212,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.180501, -0.000193834, 0.64
 collision_layer = 8
 collision_mask = 2
 
-[node name="fan" parent="Fan" instance=ExtResource("4_iywne")]
-
 [node name="Fan_collider" type="CollisionShape3D" parent="Fan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.495642, 0)
 shape = SubResource("BoxShape3D_u5sy4")
 
+[node name="pickup_fan" parent="Fan" instance=ExtResource("4_p57ef")]
+
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("5_p57ef")
 
+<<<<<<< HEAD
 [node name="lootdrop_vfx" parent="." instance=ExtResource("6_p57ef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2613, 0.283913, 5.02128)
+=======
+[node name="Pickup_Fan" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8506019, 0)
+collision_layer = 8
+collision_mask = 2
+
+[node name="pickup_fan" parent="Pickup_Fan" instance=ExtResource("5_iywne")]
+
+[node name="Pickup_Fan_Collider" type="CollisionShape3D" parent="Pickup_Fan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2924296, 0)
+shape = SubResource("BoxShape3D_p57ef")
+>>>>>>> a5abbad5428b981ec3b8a1f414c1dbf6ac0ec309

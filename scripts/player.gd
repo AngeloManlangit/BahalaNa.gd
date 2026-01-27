@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+# player variables
+var health_points = 2 # default: 2
+var item_uses = 5 # default: 5
+
 # movement variables
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
@@ -30,22 +34,23 @@ var equipped := items.FIST # default is fist
 var aim_direction
 
 # fan
-@onready var fan: Node3D = $Head/Camera/fan
+@onready var equipped_fan: Node3D = $Head/Camera/equipped_fan
 var fan_cooldown_time: float = 0.4
 var windslash = load("res://scenes/windslash.tscn")
 var instance
 
 # sticky hand
-@onready var sticky_hand: Area3D = $Head/Sticky_Hand
-@onready var rope: Node3D = $Head/Rope
-@onready var rope_model: CSGCylinder3D = $Head/Rope/Rope_Model
-var did_stick: bool = false
-const HAND_SPEED = 40.0
+@onready var sh_controller: Node = $StickyHandController
+@onready var rope_raycast: RayCast3D = $Head/Camera/Rope/Rope_Raycast
+
+# UI
+@onready var uses_label: Label = $Head/Camera/Temp_UI/Uses
+@onready var cooldown_label: Label = $Head/Camera/Temp_UI/Cooldown
 
 func _ready():
 	capture_mouse()
-	rope_model.visible = false
-	fan.visible = false
+	equipped_fan.visible = false
+	sh_controller.rope.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -57,6 +62,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+		
+func _process(delta: float) -> void:
+	uses_label.text = "Uses: " + str(item_uses)
 
 func _physics_process(delta: float) -> void:	
 	# Add the gravity.
@@ -97,33 +105,46 @@ func _physics_process(delta: float) -> void:
 			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
 	
 	# using item
-
-	if Input.is_action_just_pressed("shoot") and mouse_captured:
+	if mouse_captured:
 		match equipped:
 			items.FIST:
-				item_animation = $Head/Camera/fan/Fan_Animation
-				punch()
+				item_animation = $Head/Camera/equipped_fan/Animation
+				if Input.is_action_just_pressed("shoot"):
+					punch()
 			items.FAN:
 				# Fan logic
-				item_animation = $Head/Camera/fan/Fan_Animation
-				if !item_animation.is_playing():
-					item_animation.play("shoot")
-					generate_windslash()
-					if !is_on_floor():
-						# parameter for the power of the backblast
-						fan_blast(10)
+				item_animation = $Head/Camera/equipped_fan/Animation
+				if Input.is_action_pressed("shoot"):
+					if !item_animation.is_playing():
+						item_animation.play("shoot")
+						item_uses -= 1
+						generate_windslash()
+						if !is_on_floor():
+							# parameter for the power of the backblast
+							fan_blast(10)
+						
+						if item_uses == 0:
+							equipped_fan.visible = false
+							equipped = items.FIST
 			items.BOOMERANG:
 				# Boomerang logic
-				item_animation = $Head/Camera/fan/Fan_Animation
+				item_animation = $Head/Camera/equipped_fan/Animation
 			items.STICKY_HAND:
 				# sticky hand logic
-				item_animation = $Head/Camera/fan/Fan_Animation
-				shoot_hand(delta)
-				sticky_pull()
+				item_animation = $Head/Camera/equipped_fan/Animation
+				if Input.is_action_just_pressed("shoot"):
+					allow_input = false
+					sh_controller.launch_hand()
 				
-		if !item_animation.is_playing():
-			item_animation.play("shoot")
+				if Input.is_action_just_released("shoot") || rope_raycast.is_colliding():
+					allow_input = true
+					sh_controller.retract_hand()
 	
+				if sh_controller.launched:
+					sh_controller.handle_grapple(delta)
+		
+				sh_controller.update_rope()
+				
 	move_and_slide()
 
 # movement functions
@@ -151,7 +172,8 @@ func release_mouse():
 func pickup(picked_up_item: String):
 	if picked_up_item == "FAN":
 		equipped = items.FAN
-		fan.visible = true
+		equipped_fan.visible = true
+		item_uses = 5
 
 # fist
 func punch():
@@ -175,49 +197,3 @@ func fan_blast(blast_power: float):
 	
 func on_fan_blast_timeout():
 	allow_input = true
-
-# sticky hand
-func shoot_hand(delta: float):
-	if Input.is_action_just_pressed("shoot"):
-		did_stick = false
-		aim_direction = -camera.global_transform.basis.z
-		
-		var current_pos = sticky_hand.global_position
-		if sticky_hand.get_parent():
-			sticky_hand.get_parent().remove_child(sticky_hand)
-		get_tree().root.add_child(sticky_hand)
-		sticky_hand.global_position = current_pos
-		rope_model.visible = true
-	
-	if Input.is_action_pressed("shoot"):
-		if !did_stick:
-			sticky_hand.global_position += aim_direction * delta * HAND_SPEED
-		make_rope()
-		
-	if Input.is_action_just_released("shoot"):
-		if sticky_hand.get_parent():
-			sticky_hand.get_parent().remove_child(sticky_hand)
-		head.add_child(sticky_hand)
-		sticky_hand.position = Vector3(0.5, -0.5, -1)
-		did_stick = false
-		rope_model.visible = false
-		
-func on_hand_attached(_body):
-	did_stick = true
-	
-func on_hand_free(_body):
-	did_stick = false
-
-func sticky_pull():
-	if did_stick:
-		var pull_force_modifier: float = pow((sticky_hand.global_position - head.global_position).normalized().length(), 0.5)
-		var pull_force: Vector3 = pull_force_modifier * (sticky_hand.global_position - head.global_position).normalized()
-		velocity.x += pull_force.x
-		velocity.z += pull_force.z
-		velocity.y += pull_force.y
-	
-func make_rope():
-	var distance = head.global_position.distance_to(sticky_hand.global_position)
-	rope.look_at(sticky_hand.global_position)
-	rope_model.height = distance
-	rope_model.position.z = -distance / 2.0
