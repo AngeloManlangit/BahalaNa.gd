@@ -30,7 +30,7 @@ var equipped := items.STICKY_HAND # default is fist
 var aim_direction
 
 # fan
-@onready var fan: Node3D = $Head/Camera/fan
+@onready var equipped_fan: Node3D = $Head/Camera/equipped_fan
 var fan_cooldown_time: float = 0.4
 var windslash = load("res://scenes/windslash.tscn")
 var instance
@@ -41,7 +41,8 @@ var instance
 
 func _ready():
 	capture_mouse()
-	fan.visible = false
+	rope_model.visible = false
+	equipped_fan.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -96,37 +97,25 @@ func _physics_process(delta: float) -> void:
 	if mouse_captured:
 		match equipped:
 			items.FIST:
-				item_animation = $Head/Camera/fan/Fan_Animation
-				if Input.is_action_just_pressed("shoot"):
-					punch()
+				item_animation = $Head/Camera/equipped_fan/Fan_Animation
+				punch()
 			items.FAN:
 				# Fan logic
-				item_animation = $Head/Camera/fan/Fan_Animation
-				if Input.is_action_pressed("shoot"):
-					if !item_animation.is_playing():
-						item_animation.play("shoot")
-						generate_windslash()
-						if !is_on_floor():
-							# parameter for the power of the backblast
-							fan_blast(10)
+				item_animation = $Head/Camera/equipped_fan/Fan_Animation
+				if !item_animation.is_playing():
+					item_animation.play("shoot")
+					generate_windslash()
+					if !is_on_floor():
+						# parameter for the power of the backblast
+						fan_blast(10)
 			items.BOOMERANG:
 				# Boomerang logic
-				item_animation = $Head/Camera/fan/Fan_Animation
+				item_animation = $Head/Camera/equipped_fan/Fan_Animation
 			items.STICKY_HAND:
 				# sticky hand logic
-				item_animation = $Head/Camera/fan/Fan_Animation
-				if Input.is_action_just_pressed("shoot"):
-					allow_input = false
-					sh_controller.launch_hand()
-				
-				if Input.is_action_just_released("shoot") || rope_raycast.is_colliding():
-					allow_input = true
-					sh_controller.retract_hand(delta)
-	
-				if sh_controller.launched:
-					sh_controller.handle_grapple(delta)
-		
-				sh_controller.update_rope()
+				item_animation = $Head/Camera/equipped_fan/Fan_Animation
+				shoot_hand(delta)
+				sticky_pull()
 				
 	
 	move_and_slide()
@@ -156,7 +145,7 @@ func release_mouse():
 func pickup(picked_up_item: String):
 	if picked_up_item == "FAN":
 		equipped = items.FAN
-		fan.visible = true
+		equipped_fan.visible = true
 
 # fist
 func punch():

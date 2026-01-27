@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blp47svde4vwf"]
+
+[ext_resource type="PackedScene" uid="uid://suueh021ftkq" path="res://items/weapons/handfan.glb" id="1_4ib1p"]
+
+[node name="equipped_fan" type="Node3D"]
+
+[node name="handfan" parent="." instance=ExtResource("1_4ib1p")]
+transform = Transform3D(0.007909135, 0, 0, 0, 0.007909135, 0, 0, 0, 0.007909135, 0, 0, 0)
