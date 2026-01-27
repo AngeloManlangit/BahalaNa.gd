@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2qr4p6u8xxje"]
-
-[ext_resource type="PackedScene" uid="uid://bubqpcla1ycen" path="res://assets/temp_models/fan.glb" id="1_p64dw"]
-
-[node name="fan" instance=ExtResource("1_p64dw")]
-
-[node name="Cylinder" parent="." index="0"]
-layers = 2
-cast_shadow = 0

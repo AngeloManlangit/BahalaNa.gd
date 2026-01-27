@@ -27,14 +27,14 @@ var jump_buffer: bool = false
 
 # items
 enum items { FIST, FAN, BOOMERANG, STICKY_HAND }
-var equipped := items.FAN # default is fist
+var equipped := items.FIST # default is fist
 
 @onready var item_animation: AnimationPlayer
 @onready var item_aim: RayCast3D = $Head/Camera/Aim
 var aim_direction
 
 # fan
-@onready var fan: Node3D = $Head/Camera/fan
+@onready var equipped_fan: Node3D = $Head/Camera/equipped_fan
 var fan_cooldown_time: float = 0.4
 var windslash = load("res://scenes/windslash.tscn")
 var instance
@@ -49,7 +49,7 @@ var instance
 
 func _ready():
 	capture_mouse()
-	fan.visible = false
+	equipped_fan.visible = false
 	sh_controller.rope.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -108,12 +108,12 @@ func _physics_process(delta: float) -> void:
 	if mouse_captured:
 		match equipped:
 			items.FIST:
-				item_animation = $Head/Camera/fan/Fan_Animation
+				item_animation = $Head/Camera/equipped_fan/Animation
 				if Input.is_action_just_pressed("shoot"):
 					punch()
 			items.FAN:
 				# Fan logic
-				item_animation = $Head/Camera/fan/Fan_Animation
+				item_animation = $Head/Camera/equipped_fan/Animation
 				if Input.is_action_pressed("shoot"):
 					if !item_animation.is_playing():
 						item_animation.play("shoot")
@@ -124,14 +124,14 @@ func _physics_process(delta: float) -> void:
 							fan_blast(10)
 						
 						if item_uses == 0:
-							fan.visible = false
+							equipped_fan.visible = false
 							equipped = items.FIST
 			items.BOOMERANG:
 				# Boomerang logic
-				item_animation = $Head/Camera/fan/Fan_Animation
+				item_animation = $Head/Camera/equipped_fan/Animation
 			items.STICKY_HAND:
 				# sticky hand logic
-				item_animation = $Head/Camera/fan/Fan_Animation
+				item_animation = $Head/Camera/equipped_fan/Animation
 				if Input.is_action_just_pressed("shoot"):
 					allow_input = false
 					sh_controller.launch_hand()
@@ -172,7 +172,8 @@ func release_mouse():
 func pickup(picked_up_item: String):
 	if picked_up_item == "FAN":
 		equipped = items.FAN
-		fan.visible = true
+		equipped_fan.visible = true
+		item_uses = 5
 
 # fist
 func punch():

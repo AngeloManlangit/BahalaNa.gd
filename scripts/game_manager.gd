@@ -1,12 +1,11 @@
 extends Node
 
 @onready var player: CharacterBody3D = %Player
-@onready var pickup_area: Area3D = $"../Player/Pickup_Area"
-@onready var fan: StaticBody3D = $"../Fan"
+@onready var pickup_area: Area3D = $"%Player/Pickup_Area"
+@onready var pickup_fan: Area3D = $"../Pickup_Fan"
 
 func _process(_delta: float) -> void:
-	if fan and fan.visible and pickup_area.overlaps_body(fan):
+	if pickup_fan.visible and pickup_area.overlaps_body(pickup_fan):
 		player.pickup("FAN") # Function inside player script
-		player.item_uses = 5
-		fan.hide()
-		fan.process_mode = Node.PROCESS_MODE_DISABLED
+		pickup_fan.hide()
+		pickup_fan.process_mode = Node.PROCESS_MODE_DISABLED
