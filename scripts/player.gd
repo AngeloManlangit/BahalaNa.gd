@@ -37,6 +37,7 @@ var instance
 
 # sticky hand
 @onready var sh_controller: Node = $StickyHandController
+@onready var rope_raycast: RayCast3D = $Head/Camera/Rope/Rope_Raycast
 
 func _ready():
 	capture_mouse()
@@ -96,7 +97,7 @@ func _physics_process(delta: float) -> void:
 		match equipped:
 			items.FIST:
 				item_animation = $Head/Camera/fan/Fan_Animation
-				if Input.is_action_pressed("shoot"):
+				if Input.is_action_just_pressed("shoot"):
 					punch()
 			items.FAN:
 				# Fan logic
@@ -115,10 +116,12 @@ func _physics_process(delta: float) -> void:
 				# sticky hand logic
 				item_animation = $Head/Camera/fan/Fan_Animation
 				if Input.is_action_just_pressed("shoot"):
+					allow_input = false
 					sh_controller.launch_hand()
 				
-				if Input.is_action_just_released("shoot"):
-					sh_controller.retract_hand()
+				if Input.is_action_just_released("shoot") || rope_raycast.is_colliding():
+					allow_input = true
+					sh_controller.retract_hand(delta)
 	
 				if sh_controller.launched:
 					sh_controller.handle_grapple(delta)

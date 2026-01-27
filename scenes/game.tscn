@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=15 format=3 uid="uid://d4nddivpwn6q6"]
 
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://beovagt1dwo1b" path="res://scenes/vince_ball.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://c2qr4p6u8xxje" path="res://scenes/fan.tscn" id="4_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://jxxsnvi2pl5p" path="res://items/boomeranglootdrop_vfx.tscn" id="6_p57ef"]
 
@@ -37,9 +36,6 @@ albedo_color = Color(0, 0.58961904, 0.14328283, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_lnu2h"]
 left_to_right = 1.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u5sy4"]
-size = Vector3(2.0429688, 1.1123047, 1)
 
 [node name="Game" type="Node3D"]
 
@@ -174,19 +170,8 @@ height = 7.667366
 
 [node name="AudioManager" type="Node" parent="."]
 
-[node name="Fan" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18050146, -0.0001938343, 0.64464957)
-collision_layer = 8
-collision_mask = 2
-
-[node name="fan" parent="Fan" instance=ExtResource("4_iywne")]
-
-[node name="Fan_collider" type="CollisionShape3D" parent="Fan"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49564153, 0)
-shape = SubResource("BoxShape3D_u5sy4")
-
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("5_p57ef")
 
 [node name="lootdrop_vfx" parent="." instance=ExtResource("6_p57ef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2613, 0.28391337, 5.021278)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2613, 0.28391337, -1.1403604)

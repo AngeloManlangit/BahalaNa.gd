@@ -5,7 +5,9 @@ extends Node
 
 @onready var player: CharacterBody3D = get_parent()
 
-const PULL_FORCE_STRENGTH: float = 200.0
+var force := Vector3.ZERO
+const PULL_FORCE_STRENGTH: float = 100.0
+const BOOST_STRENGTH: float = 20.0
 var target: Vector3
 var launched: bool = false
 	
@@ -14,13 +16,12 @@ func launch_hand():
 		target = ray.get_collision_point()
 		launched = true
 
-func retract_hand():
+func retract_hand(delta: float):
 	launched = false
 	
 func handle_grapple(delta: float):
 	var target_direction = player.global_position.direction_to(target).normalized()
 	var target_distance = player.global_position.distance_to(target)
-	var force := Vector3.ZERO
 	
 	if target_distance > 0:
 		force = target_direction * PULL_FORCE_STRENGTH
@@ -30,7 +31,6 @@ func handle_grapple(delta: float):
 	# so that the player doesn't go so high
 	if player.velocity.y < 15.0:
 		player.velocity.y += force.y * delta
-	print(str(player.velocity.y))
 
 func update_rope():
 	if !launched:
