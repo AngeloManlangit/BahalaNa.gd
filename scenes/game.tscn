@@ -172,6 +172,17 @@ height = 7.667366
 
 [node name="AudioManager" type="Node" parent="."]
 
+[node name="Fan" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18050146, -0.0001938343, 0.64464957)
+collision_layer = 8
+collision_mask = 2
+
+[node name="Fan_collider" type="CollisionShape3D" parent="Fan"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49564153, 0)
+shape = SubResource("BoxShape3D_u5sy4")
+
+[node name="pickup_fan" parent="Fan" instance=ExtResource("4_p57ef")]
+
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("5_p57ef")
 
