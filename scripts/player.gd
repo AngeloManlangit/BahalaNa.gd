@@ -23,7 +23,7 @@ var jump_buffer: bool = false
 
 # items
 enum items { FIST, FAN, BOOMERANG, STICKY_HAND }
-var equipped := items.FIST # default is fist
+var equipped := items.STICKY_HAND # default is fist
 
 @onready var item_animation: AnimationPlayer
 @onready var item_aim: RayCast3D = $Head/Camera/Aim
@@ -36,11 +36,8 @@ var windslash = load("res://scenes/windslash.tscn")
 var instance
 
 # sticky hand
-@onready var sticky_hand: Area3D = $Head/Sticky_Hand
-@onready var rope: Node3D = $Head/Rope
-@onready var rope_model: CSGCylinder3D = $Head/Rope/Rope_Model
-var did_stick: bool = false
-const HAND_SPEED = 40.0
+@onready var sh_controller: Node = $StickyHandController
+@onready var rope_raycast: RayCast3D = $Head/Camera/Rope/Rope_Raycast
 
 func _ready():
 	capture_mouse()
@@ -97,8 +94,7 @@ func _physics_process(delta: float) -> void:
 			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
 	
 	# using item
-
-	if Input.is_action_just_pressed("shoot") and mouse_captured:
+	if mouse_captured:
 		match equipped:
 			items.FIST:
 				item_animation = $Head/Camera/equipped_fan/Fan_Animation
@@ -121,8 +117,6 @@ func _physics_process(delta: float) -> void:
 				shoot_hand(delta)
 				sticky_pull()
 				
-		if !item_animation.is_playing():
-			item_animation.play("shoot")
 	
 	move_and_slide()
 
@@ -175,49 +169,3 @@ func fan_blast(blast_power: float):
 	
 func on_fan_blast_timeout():
 	allow_input = true
-
-# sticky hand
-func shoot_hand(delta: float):
-	if Input.is_action_just_pressed("shoot"):
-		did_stick = false
-		aim_direction = -camera.global_transform.basis.z
-		
-		var current_pos = sticky_hand.global_position
-		if sticky_hand.get_parent():
-			sticky_hand.get_parent().remove_child(sticky_hand)
-		get_tree().root.add_child(sticky_hand)
-		sticky_hand.global_position = current_pos
-		rope_model.visible = true
-	
-	if Input.is_action_pressed("shoot"):
-		if !did_stick:
-			sticky_hand.global_position += aim_direction * delta * HAND_SPEED
-		make_rope()
-		
-	if Input.is_action_just_released("shoot"):
-		if sticky_hand.get_parent():
-			sticky_hand.get_parent().remove_child(sticky_hand)
-		head.add_child(sticky_hand)
-		sticky_hand.position = Vector3(0.5, -0.5, -1)
-		did_stick = false
-		rope_model.visible = false
-		
-func on_hand_attached(_body):
-	did_stick = true
-	
-func on_hand_free(_body):
-	did_stick = false
-
-func sticky_pull():
-	if did_stick:
-		var pull_force_modifier: float = pow((sticky_hand.global_position - head.global_position).normalized().length(), 0.5)
-		var pull_force: Vector3 = pull_force_modifier * (sticky_hand.global_position - head.global_position).normalized()
-		velocity.x += pull_force.x
-		velocity.z += pull_force.z
-		velocity.y += pull_force.y
-	
-func make_rope():
-	var distance = head.global_position.distance_to(sticky_hand.global_position)
-	rope.look_at(sticky_hand.global_position)
-	rope_model.height = distance
-	rope_model.position.z = -distance / 2.0
