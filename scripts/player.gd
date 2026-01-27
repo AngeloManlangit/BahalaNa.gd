@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+# player variables
+var health_points = 2 # default: 2
+var item_uses = 5 # default: 5
+
 # movement variables
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
@@ -23,7 +27,7 @@ var jump_buffer: bool = false
 
 # items
 enum items { FIST, FAN, BOOMERANG, STICKY_HAND }
-var equipped := items.STICKY_HAND # default is fist
+var equipped := items.FAN # default is fist
 
 @onready var item_animation: AnimationPlayer
 @onready var item_aim: RayCast3D = $Head/Camera/Aim
@@ -39,9 +43,14 @@ var instance
 @onready var sh_controller: Node = $StickyHandController
 @onready var rope_raycast: RayCast3D = $Head/Camera/Rope/Rope_Raycast
 
+# UI
+@onready var uses_label: Label = $Head/Camera/Temp_UI/Uses
+@onready var cooldown_label: Label = $Head/Camera/Temp_UI/Cooldown
+
 func _ready():
 	capture_mouse()
 	fan.visible = false
+	sh_controller.rope.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -53,6 +62,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+		
+func _process(delta: float) -> void:
+	uses_label.text = "Uses: " + str(item_uses)
 
 func _physics_process(delta: float) -> void:	
 	# Add the gravity.
@@ -105,10 +117,15 @@ func _physics_process(delta: float) -> void:
 				if Input.is_action_pressed("shoot"):
 					if !item_animation.is_playing():
 						item_animation.play("shoot")
+						item_uses -= 1
 						generate_windslash()
 						if !is_on_floor():
 							# parameter for the power of the backblast
 							fan_blast(10)
+						
+						if item_uses == 0:
+							fan.visible = false
+							equipped = items.FIST
 			items.BOOMERANG:
 				# Boomerang logic
 				item_animation = $Head/Camera/fan/Fan_Animation
@@ -121,14 +138,13 @@ func _physics_process(delta: float) -> void:
 				
 				if Input.is_action_just_released("shoot") || rope_raycast.is_colliding():
 					allow_input = true
-					sh_controller.retract_hand(delta)
+					sh_controller.retract_hand()
 	
 				if sh_controller.launched:
 					sh_controller.handle_grapple(delta)
 		
 				sh_controller.update_rope()
 				
-	
 	move_and_slide()
 
 # movement functions

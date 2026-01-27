@@ -7,5 +7,6 @@ extends Node
 func _process(_delta: float) -> void:
 	if fan and fan.visible and pickup_area.overlaps_body(fan):
 		player.pickup("FAN") # Function inside player script
+		player.item_uses = 5
 		fan.hide()
 		fan.process_mode = Node.PROCESS_MODE_DISABLED

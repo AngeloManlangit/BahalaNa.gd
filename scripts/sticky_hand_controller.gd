@@ -7,7 +7,6 @@ extends Node
 
 var force := Vector3.ZERO
 const PULL_FORCE_STRENGTH: float = 100.0
-const BOOST_STRENGTH: float = 20.0
 var target: Vector3
 var launched: bool = false
 	
@@ -16,7 +15,7 @@ func launch_hand():
 		target = ray.get_collision_point()
 		launched = true
 
-func retract_hand(delta: float):
+func retract_hand():
 	launched = false
 	
 func handle_grapple(delta: float):

@@ -108,6 +108,7 @@ collision_mask = 13
 
 [node name="Rope" parent="Head/Camera" instance=ExtResource("4_qlg0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27126157, -0.24065858, -0.572635)
+visible = false
 
 [node name="Rope_Raycast" type="RayCast3D" parent="Head/Camera/Rope"]
 target_position = Vector3(0, 0, -0.5)
@@ -128,6 +129,24 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("5_fjrip")
+
+[node name="Temp_UI" type="Control" parent="Head/Camera"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Uses" type="Label" parent="Head/Camera/Temp_UI"]
+layout_mode = 0
+offset_right = 198.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 32
+text = "Uses: "
+
+[node name="Cooldown" type="Label" parent="Head/Camera/Temp_UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 
