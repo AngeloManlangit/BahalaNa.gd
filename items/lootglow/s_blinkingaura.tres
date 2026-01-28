@@ -45,7 +45,7 @@ keep_scale = true
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled;
 
 uniform vec4 main_color : source_color;
 uniform sampler2D transparency_texture : source_color;
@@ -147,7 +147,7 @@ nodes/fragment/2/position = Vector2(-1460, 160)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_vlf6h")
 nodes/fragment/3/position = Vector2(-1080, 180)
 nodes/fragment/4/node = SubResource("VisualShaderNodeColorParameter_hpfti")
-nodes/fragment/4/position = Vector2(-377.346, -77.9969)
+nodes/fragment/4/position = Vector2(-377.3459, -77.99692)
 nodes/fragment/5/node = SubResource("VisualShaderNodeInput_bu8ig")
 nodes/fragment/5/position = Vector2(-1460, 560)
 nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_kxubx")
