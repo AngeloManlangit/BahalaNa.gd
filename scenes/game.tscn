@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=20 format=3 uid="uid://d4nddivpwn6q6"]
 
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://csm0g4hjajgt5" path="res://scenes/pickup_fan.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://jxxsnvi2pl5p" path="res://items/boomeranglootdrop_vfx.tscn" id="6_gee14"]
-[ext_resource type="PackedScene" uid="uid://cfuf4pg2d6gv7" path="res://scenes/buildings_level.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://di0ario1en6hn" path="res://items/stickyhandlootdrop_vfx.tscn" id="7_0tnpc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iywne"]
@@ -195,10 +194,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56932116, 0)
 [node name="Pickup_Fan_Collider" type="CollisionShape3D" parent="Pickup_Fan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8323541, 0.07163805)
 shape = SubResource("BoxShape3D_p57ef")
-
-[node name="Buildings" parent="." instance=ExtResource("6_p57ef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.965458, 0.118392944, 110.27506)
-visible = false
 
 [node name="Pickup_Boomerang" type="Area3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.567759, 0, 3.4877048)
