@@ -1,4 +1,4 @@
-extends Area3D
+extends Node3D
 
 @export var spin_speed : float = 1.0
 @export var hover_speed : float = 2.0

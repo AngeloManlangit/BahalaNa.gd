@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://c6pxeabgrmyi1"]
+[gd_scene load_steps=21 format=3 uid="uid://c6pxeabgrmyi1"]
 
-[ext_resource type="Shader" uid="uid://busy57kstgmrc" path="res://lootglow/s_blinkingaura.tres" id="1_upeug"]
-[ext_resource type="Texture2D" uid="uid://ckalo3nn7kcew" path="res://texture/T_Aura7.png" id="2_ylobu"]
-[ext_resource type="PackedScene" uid="uid://suueh021ftkq" path="res://weapons/handfan.glb" id="3_casro"]
-[ext_resource type="Script" uid="uid://oxydlo3jes5r" path="res://scripts/handfanspin.gd" id="4_x8ljo"]
+[ext_resource type="Shader" uid="uid://busy57kstgmrc" path="res://items/lootglow/s_blinkingaura.tres" id="1_upeug"]
+[ext_resource type="Texture2D" uid="uid://ckalo3nn7kcew" path="res://items/texture/T_Aura7.png" id="2_ylobu"]
+[ext_resource type="PackedScene" uid="uid://suueh021ftkq" path="res://items/weapons/handfan.glb" id="3_casro"]
+[ext_resource type="Script" uid="uid://oxydlo3jes5r" path="res://items/handfanspin.gd" id="4_x8ljo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wc2lb"]
 render_priority = 0
@@ -114,9 +114,6 @@ shape = 0
 size = 0.08
 section_segments = 4
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yvgb5"]
-size = Vector3(1.9536133, 1.0595398, 0.18865108)
-
 [node name="lootdrop_vfx" type="Node3D"]
 
 [node name="auraglow" type="MeshInstance3D" parent="."]
@@ -145,12 +142,8 @@ trail_lifetime = 0.7
 process_material = SubResource("ParticleProcessMaterial_4eeln")
 draw_pass_1 = SubResource("RibbonTrailMesh_bqpn2")
 
-[node name="lootitem" type="Area3D" parent="."]
+[node name="lootitem" type="Node3D" parent="."]
 script = ExtResource("4_x8ljo")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="lootitem"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.021728516, 1.393317, 0.16632128)
-shape = SubResource("BoxShape3D_yvgb5")
 
 [node name="Visuals" parent="lootitem" instance=ExtResource("3_casro")]
 transform = Transform3D(0.009, 0, 0, 0, 0.009, 0, 0, 0, 0.009, 0, 0.92023325, 0.19530845)

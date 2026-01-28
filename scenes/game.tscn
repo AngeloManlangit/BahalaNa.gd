@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cfuf4pg2d6gv7" path="res://scenes/buildings_level.tscn" id="6_p57ef"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iywne"]
-size = Vector3(1.453125, 2.2949219, 1)
+size = Vector3(1.453125, 2.2949219, 1.2875977)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yqjtg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -39,13 +39,13 @@ albedo_color = Color(0, 0.58961904, 0.14328283, 1)
 left_to_right = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p57ef"]
-size = Vector3(1.6679688, 1.1005859, 1)
+size = Vector3(1.6679688, 1.1005859, 6.9138184)
 
 [node name="Game" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.31349, 1.0768079, 147.39458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3606062, 1.0768079, 5.408163)
 collision_mask = 13
 
 [node name="Pickup_Area" type="Area3D" parent="Player"]
@@ -53,6 +53,7 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="Pickup_Collider" type="CollisionShape3D" parent="Player/Pickup_Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.14379883)
 shape = SubResource("BoxShape3D_iywne")
 
 [node name="Map" type="Node" parent="."]
@@ -179,9 +180,9 @@ script = ExtResource("5_p57ef")
 [node name="Pickup_Fan" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8506019, 0)
 collision_layer = 8
-collision_mask = 2
 
 [node name="pickup_fan" parent="Pickup_Fan" instance=ExtResource("5_iywne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56932116, 0)
 
 [node name="Pickup_Fan_Collider" type="CollisionShape3D" parent="Pickup_Fan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2924296, 0)
