@@ -1,11 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=19 format=3 uid="uid://d4nddivpwn6q6"]
 
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://beovagt1dwo1b" path="res://scenes/vince_ball.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://csm0g4hjajgt5" path="res://scenes/pickup_fan.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://jxxsnvi2pl5p" path="res://items/boomeranglootdrop_vfx.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://cfuf4pg2d6gv7" path="res://scenes/buildings_level.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://di0ario1en6hn" path="res://items/stickyhandlootdrop_vfx.tscn" id="7_0tnpc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iywne"]
 size = Vector3(1.453125, 2.2949219, 1.2875977)
@@ -39,7 +41,7 @@ albedo_color = Color(0, 0.58961904, 0.14328283, 1)
 left_to_right = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p57ef"]
-size = Vector3(1.6679688, 1.1005859, 6.9138184)
+size = Vector3(1.6679688, 1.4421844, 0.8318969)
 
 [node name="Game" type="Node3D"]
 
@@ -185,8 +187,14 @@ collision_layer = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56932116, 0)
 
 [node name="Pickup_Fan_Collider" type="CollisionShape3D" parent="Pickup_Fan"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2924296, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8323541, 0.07163805)
 shape = SubResource("BoxShape3D_p57ef")
+
+[node name="pickup_boomerang" parent="Pickup_Fan" instance=ExtResource("6_gee14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1409824, 1.1345148, 2.3545325)
+
+[node name="pickup_stickyhand" parent="Pickup_Fan" instance=ExtResource("7_0tnpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0759473, 1.1345143, 3.576338)
 
 [node name="Buildings" parent="." instance=ExtResource("6_p57ef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.965458, 0.118392944, 110.27506)

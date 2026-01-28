@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbcsaqa08rnq3"]
+[gd_scene load_steps=14 format=3 uid="uid://cbcsaqa08rnq3"]
 
 [ext_resource type="Texture2D" uid="uid://d38inaf4yhtfe" path="res://assets/goofy.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://chvc3jetbh6ws" path="res://scripts/player.gd" id="1_g2els"]
@@ -19,9 +19,62 @@ points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4
 
 [sub_resource type="Animation" id="Animation_tuyoq"]
 resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera/equipped_fan:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.32, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6160296, -0.4170484, -0.68629694), Vector3(-0.269, -0.417, -0.686), Vector3(0.6160296, -0.4170484, -0.68629694)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera/equipped_fan:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19, 0.33, 0.42, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.28259277, -1.9498311, 1.156102), Vector3(-0.059575062, -1.6580958, 1.1352342), Vector3(0.7270897, -0.46771348, 1.9392229), Vector3(0.37862468, -1.2333356, 1.3151094), Vector3(-0.28259277, -1.9498311, 1.156102)]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera/equipped_fan:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6160296, -0.4170484, -0.68629694)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera/equipped_fan:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.28259277, -1.9498311, 1.156102)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjrip"]
 _data = {
+&"RESET": SubResource("Animation_fjrip"),
 &"shoot": SubResource("Animation_tuyoq")
 }
 
@@ -31,6 +84,7 @@ script = ExtResource("1_g2els")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_g2els")
 
 [node name="Body_Collider" type="CollisionShape3D" parent="."]
@@ -88,7 +142,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="equipped_fan" parent="Head/Camera" instance=ExtResource("5_smehm")]
-transform = Transform3D(-0.3712671, 0.27198857, -0.8877967, 0.21869022, 0.9548519, 0.20107795, 0.9024053, -0.11949882, -0.41398636, 0.657, -0.511, -0.809)
+transform = Transform3D(0.08801059, 0.4430363, -0.8921732, 0.87893724, 0.38692906, 0.2788465, 0.4687469, -0.8087056, -0.3553472, 0.6160296, -0.4170484, -0.68629694)
 
 [node name="Animation" type="AnimationPlayer" parent="Head/Camera/equipped_fan"]
 root_node = NodePath("../../../..")

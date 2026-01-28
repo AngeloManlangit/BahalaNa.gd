@@ -27,7 +27,7 @@ var jump_buffer: bool = false
 
 # items
 enum items { FIST, FAN, BOOMERANG, STICKY_HAND }
-var equipped := items.FAN # default is fist
+var equipped := items.FIST # default is fist
 
 @onready var item_animation: AnimationPlayer
 @onready var item_aim: RayCast3D = $Head/Camera/Aim
