@@ -135,9 +135,6 @@ func _physics_process(delta: float) -> void:
 					item_uses -= 1
 					boomerang_controller.begin_throw()
 				
-				if boomerang_controller.thrown: 
-					boomerang_controller.throw(delta)
-				
 				if item_uses == 0 && boomerang_controller.returned:
 					boomerang_controller.equipped_boomerang.visible = false
 					equipped = items.FIST
@@ -158,7 +155,11 @@ func _physics_process(delta: float) -> void:
 					equipped = items.FIST
 		
 				sh_controller.update_rope()
-				
+	
+	if boomerang_controller.thrown and !boomerang_controller.returned:
+		boomerang_controller.equipped_boomerang.visible = false
+		boomerang_controller.throw(delta)
+		
 	move_and_slide()
 
 # movement functions
