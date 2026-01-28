@@ -13,7 +13,7 @@ var instance
 
 func generate_windslash():
 	instance = windslash.instantiate()
-	instance.position = item_aim.global_position
+	instance.position = item_aim.global_position - Vector3(0, 0.3, 0)
 	instance.transform.basis = item_aim.global_transform.basis
 	player.get_parent().add_child(instance)
 	

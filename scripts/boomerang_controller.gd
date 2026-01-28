@@ -15,8 +15,8 @@ var halt_timer: Timer
 
 var direction
 var speed: float = 0
-@export var ACCELERATION: float = 100.0
-@export var MAX_SPEED: float = 30.0
+@export var ACCELERATION: float = 120.0
+@export var MAX_SPEED: float = 40.0
 
 func _ready():
 	thrown = false
@@ -27,7 +27,7 @@ func _ready():
 	# halt timer
 	halt_timer = Timer.new()
 	halt_timer.one_shot = true
-	halt_timer.wait_time = 2.0
+	halt_timer.wait_time = 1.5
 	halt_timer.timeout.connect(on_boomerang_timeout)
 	add_child(halt_timer)
 
@@ -50,7 +50,15 @@ func throw(delta: float):
 			throw_boomerang.position += direction * Vector3(0, 0, -speed) * delta
 			print(str(throw_boomerang.position))
 			
-			if speed <= 0 or throw_boomerang.ray_cast.is_colliding():
+			if speed <= 0: 
+				print("Halt from Speed")
+				enter_halt_state()
+			elif throw_boomerang.shape_cast.is_colliding():
+				var temp = throw_boomerang.shape_cast.get_collider(0)
+				if temp:
+					print("Hitted: ", temp.name)
+				
+				print("Halt from hit")
 				enter_halt_state()
 				
 		BoomerState.HALT:

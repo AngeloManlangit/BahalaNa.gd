@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqvwihf2m3fou"]
+[gd_scene load_steps=8 format=3 uid="uid://cqvwihf2m3fou"]
 
 [ext_resource type="Script" uid="uid://bh0gjh6dkowsi" path="res://scripts/throw_boomerang.gd" id="1_bfqc7"]
 [ext_resource type="PackedScene" uid="uid://dvv1nax1yqlrh" path="res://items/weapons/boomerang.tscn" id="1_cmb04"]
@@ -44,9 +44,11 @@ _data = {
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfqc7"]
 
-[node name="Throw_Boomerang" type="Node3D" node_paths=PackedStringArray("ray_cast", "timer")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_bfqc7"]
+
+[node name="Throw_Boomerang" type="Node3D" node_paths=PackedStringArray("shape_cast", "timer")]
 script = ExtResource("1_bfqc7")
-ray_cast = NodePath("RayCast3D")
+shape_cast = NodePath("ShapeCast3D")
 timer = NodePath("Timer")
 
 [node name="boomerang" parent="." instance=ExtResource("1_cmb04")]
@@ -62,14 +64,15 @@ transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_bfqc7")
 transparency = 1.0
 cast_shadow = 0
-use_collision = true
 size = Vector3(3.7910156, 0.23632813, 3.8476563)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.41463912)
-target_position = Vector3(0, 0, -1)
-debug_shape_custom_color = Color(0.44705883, 0, 0, 1)
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+transform = Transform3D(2.925, 0, 0, 0, 0.5, 0, 0, 0, 1.705, 0, 0, 0)
+shape = SubResource("SphereShape3D_bfqc7")
+target_position = Vector3(0, 0, -0.5)
+margin = 0.04
+max_results = 1

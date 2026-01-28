@@ -44,7 +44,6 @@ var aim_direction
 
 # UI
 @onready var uses_label: Label = $Head/Camera/Temp_UI/Uses
-@onready var cooldown_label: Label = $Head/Camera/Temp_UI/Cooldown
 
 func _ready():
 	capture_mouse()
