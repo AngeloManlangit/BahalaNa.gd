@@ -131,9 +131,10 @@ func _physics_process(delta: float) -> void:
 			items.BOOMERANG:
 				# Boomerang logic
 				boomerang_controller.equipped_boomerang.visible = true
-				if Input.is_action_just_pressed("shoot"):
-					item_uses -= 1
-					boomerang_controller.begin_throw()
+				if !boomerang_controller.thrown:
+					if Input.is_action_just_pressed("shoot"):
+						item_uses -= 1
+						boomerang_controller.begin_throw()
 				
 				if item_uses == 0 && boomerang_controller.returned:
 					boomerang_controller.equipped_boomerang.visible = false
