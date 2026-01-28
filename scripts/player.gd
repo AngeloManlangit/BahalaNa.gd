@@ -27,17 +27,14 @@ var jump_buffer: bool = false
 
 # items
 enum items { FIST, FAN, BOOMERANG, STICKY_HAND }
-var equipped := items.FIST # default is fist
+var equipped := items.FAN # default is fist
 
 @onready var item_animation: AnimationPlayer
 @onready var item_aim: RayCast3D = $Head/Camera/Aim
 var aim_direction
 
 # fan
-@onready var equipped_fan: Node3D = $Head/Camera/equipped_fan
-var fan_cooldown_time: float = 0.4
-var windslash = load("res://scenes/windslash.tscn")
-var instance
+@onready var fan_controller: Node = $FanController
 
 # sticky hand
 @onready var sh_controller: Node = $StickyHandController
@@ -49,7 +46,7 @@ var instance
 
 func _ready():
 	capture_mouse()
-	equipped_fan.visible = false
+	fan_controller.equipped_fan.visible = false
 	sh_controller.rope.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -65,6 +62,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _process(delta: float) -> void:
 	uses_label.text = "Uses: " + str(item_uses)
+	
 
 func _physics_process(delta: float) -> void:	
 	# Add the gravity.
@@ -113,18 +111,19 @@ func _physics_process(delta: float) -> void:
 					punch()
 			items.FAN:
 				# Fan logic
+				fan_controller.equipped_fan.visible = true
 				item_animation = $Head/Camera/equipped_fan/Animation
 				if Input.is_action_pressed("shoot"):
 					if !item_animation.is_playing():
 						item_animation.play("shoot")
 						item_uses -= 1
-						generate_windslash()
+						fan_controller.generate_windslash()
 						if !is_on_floor():
 							# parameter for the power of the backblast
-							fan_blast(10)
+							fan_controller.fan_blast(10)
 						
 						if item_uses == 0:
-							equipped_fan.visible = false
+							fan_controller.equipped_fan.visible = false
 							equipped = items.FIST
 			items.BOOMERANG:
 				# Boomerang logic
@@ -172,28 +171,15 @@ func release_mouse():
 func pickup(picked_up_item: String):
 	if picked_up_item == "FAN":
 		equipped = items.FAN
-		equipped_fan.visible = true
 		item_uses = 5
+	elif picked_up_item == "BOOMERANG":
+		equipped = items.BOOMERANG
+		item_uses = 3
+	elif picked_up_item == "STICKY_HAND":
+		equipped = items.STICKY_HAND
+		item_uses = 2
 
 # fist
 func punch():
 	print("one punch")
 	pass
-
-# fan
-func generate_windslash():
-	instance = windslash.instantiate()
-	instance.position = item_aim.global_position
-	instance.transform.basis = item_aim.global_transform.basis
-	get_parent().add_child(instance)
-	
-func fan_blast(blast_power: float):
-	# for the backward motion
-	velocity.x = -head.basis.x.z * (blast_power * 0.8)
-	velocity.z = head.basis.x.x * (blast_power * 0.8)
-	velocity.y = -camera.basis.y.z * blast_power
-	allow_input = false
-	get_tree().create_timer(fan_cooldown_time).timeout.connect(on_fan_blast_timeout)
-	
-func on_fan_blast_timeout():
-	allow_input = true

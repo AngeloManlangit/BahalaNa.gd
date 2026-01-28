@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://4j54mu060wld"]
+
+[ext_resource type="PackedScene" uid="uid://suueh021ftkq" path="res://items/weapons/handfan.glb" id="1_fmemf"]
+
+[node name="handfan" instance=ExtResource("1_fmemf")]
+
+[node name="Plane_001" parent="." index="0"]
+cast_shadow = 0
+
+[node name="Sphere" parent="." index="1"]
+cast_shadow = 0
+
+[node name="Plane_002" parent="." index="2"]
+cast_shadow = 0

@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbcsaqa08rnq3"]
+[gd_scene load_steps=13 format=3 uid="uid://cbcsaqa08rnq3"]
 
 [ext_resource type="Texture2D" uid="uid://d38inaf4yhtfe" path="res://assets/goofy.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://chvc3jetbh6ws" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://dpvvi4yo2i3tk" path="res://scenes/hand_rope.tscn" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dywecgyuaavbf" path="res://assets/temp_models/crosshair.png" id="5_fjrip"]
-[ext_resource type="PackedScene" path="res://scenes/equipped_fan.tscn" id="5_smehm"]
+[ext_resource type="PackedScene" uid="uid://blp47svde4vwf" path="res://scenes/equipped_fan.tscn" id="5_smehm"]
 [ext_resource type="Script" uid="uid://dvyx65gu52fkr" path="res://scripts/sticky_hand_controller.gd" id="5_tuyoq"]
+[ext_resource type="Script" uid="uid://b7riaurrvmjp0" path="res://scripts/fan_controller.gd" id="7_fjrip"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
 albedo_texture = ExtResource("1_3vyb7")
@@ -101,5 +102,10 @@ libraries = {
 script = ExtResource("5_tuyoq")
 ray = NodePath("../Head/Camera/Aim")
 rope = NodePath("../Head/Camera/Rope")
+
+[node name="FanController" type="Node" parent="." node_paths=PackedStringArray("equipped_fan", "item_aim")]
+script = ExtResource("7_fjrip")
+equipped_fan = NodePath("../Head/Camera/equipped_fan")
+item_aim = NodePath("../Head/Camera/Aim")
 
 [connection signal="timeout" from="Coyote_Timer" to="." method="on_coyote_timeout"]
