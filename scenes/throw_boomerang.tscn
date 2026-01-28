@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqvwihf2m3fou"]
+
+[ext_resource type="Script" uid="uid://bh0gjh6dkowsi" path="res://scripts/throw_boomerang.gd" id="1_bfqc7"]
+[ext_resource type="PackedScene" uid="uid://dvv1nax1yqlrh" path="res://items/weapons/boomerang.tscn" id="1_cmb04"]
+
+[sub_resource type="Animation" id="Animation_bfqc7"]
+resource_name = "spin"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 0.59460354),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0), Vector3(-1.5707964, -6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sc7an"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5707964, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_airr0"]
+_data = {
+&"RESET": SubResource("Animation_sc7an"),
+&"spin": SubResource("Animation_bfqc7")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfqc7"]
+
+[node name="Throw_Boomerang" type="Node3D" node_paths=PackedStringArray("ray_cast")]
+script = ExtResource("1_bfqc7")
+ray_cast = NodePath("RayCast3D")
+
+[node name="boomerang" parent="." instance=ExtResource("1_cmb04")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="boomerang"]
+libraries = {
+&"": SubResource("AnimationLibrary_airr0")
+}
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_bfqc7")
+transparency = 1.0
+cast_shadow = 0
+use_collision = true
+size = Vector3(3.7910156, 0.23632813, 3.8476563)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.41463912)
+target_position = Vector3(0, 0, -1)
+debug_shape_custom_color = Color(0.44705883, 0, 0, 1)
