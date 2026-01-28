@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Project-Defiance"
+<<<<<<< Updated upstream
 run/main_scene="uid://b8c1r512affx7"
 config/features=PackedStringArray("4.5", "Forward Plus")
+=======
+run/main_scene="uid://d4nddivpwn6q6"
+config/features=PackedStringArray("4.4", "Forward Plus")
+>>>>>>> Stashed changes
 config/icon="res://icon.svg"
 
 [input]
