@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbcsaqa08rnq3"]
+[gd_scene load_steps=16 format=3 uid="uid://cbcsaqa08rnq3"]
 
 [ext_resource type="Texture2D" uid="uid://d38inaf4yhtfe" path="res://assets/goofy.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://chvc3jetbh6ws" path="res://scripts/player.gd" id="1_g2els"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dywecgyuaavbf" path="res://assets/temp_models/crosshair.png" id="5_fjrip"]
 [ext_resource type="PackedScene" uid="uid://blp47svde4vwf" path="res://scenes/equipped_fan.tscn" id="5_smehm"]
 [ext_resource type="Script" uid="uid://dvyx65gu52fkr" path="res://scripts/sticky_hand_controller.gd" id="5_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://bs6cc2tumftx8" path="res://scenes/equipped_boomerang.tscn" id="6_smehm"]
 [ext_resource type="Script" uid="uid://b7riaurrvmjp0" path="res://scripts/fan_controller.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://y3uic4h0voju" path="res://scripts/boomerang_controller.gd" id="9_ur7pv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vyb7"]
 albedo_texture = ExtResource("1_3vyb7")
@@ -16,34 +18,6 @@ material = SubResource("StandardMaterial3D_3vyb7")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qhqgy"]
 points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4760704, 0.49888408, 0.16971254, 0.5591441, 0.46417162, 0.23105091, -0.8035912, 0.32045516, 0.40741014, 0.651043, -0.24352328, -0.4827893, 0.59484255, 0.082213186, -0.3628679, -0.68231165, 0.2896967, 0.46904355, -0.65452886, -0.06627126, -0.12744367, 0.8427015, -0.33810276, -0.39343542, -0.6839421, -0.24471663, 0.43825462, 0.62330925, 0.20084947, 0.0841477, 0.977454, 0.11479468, -0.06820232, -0.9764576, -0.12927033, 0.20054972, -0.56312895, -0.4514544, -0.18552664, 0.59545326, -0.4534751, -0.27336287, 0.59226835, 0.40775412, -0.0069364863, -0.47682306, 0.49966025, 0.37582088, -0.5886136, 0.31695515, 0.111579016, 0.5630594, -0.48117727, -0.41725034, 0.5278656, -0.27049688, -0.48454633, -0.59697217, -0.06650971, -0.27974695, 0.90856135, 0.05333608, -0.25019687, -0.8807117, 0.20531891, 0.263647, -0.90277094, -0.1273943, 0.29336792, 0.8715263, -0.15719566, 0.3734115, -0.5263189, -0.32824618, 0.4996626, 0.47664148, -0.0068885577, 0.053105574, 0.8750009, 0.32470253, -0.15454252, -0.5908538, 0.4658794, -0.09727988, -0.7823577, -0.39818847, -0.3876489, -0.49817133, 0.31564978, -0.30067965, -0.58799505, -0.38890144)
-
-[sub_resource type="Animation" id="Animation_tuyoq"]
-resource_name = "shoot"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera/equipped_fan:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.32, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.6160296, -0.4170484, -0.68629694), Vector3(-0.269, -0.417, -0.686), Vector3(0.6160296, -0.4170484, -0.68629694)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head/Camera/equipped_fan:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.19, 0.33, 0.42, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.28259277, -1.9498311, 1.156102), Vector3(-0.059575062, -1.6580958, 1.1352342), Vector3(0.7270897, -0.46771348, 1.9392229), Vector3(0.37862468, -1.2333356, 1.3151094), Vector3(-0.28259277, -1.9498311, 1.156102)]
-}
 
 [sub_resource type="Animation" id="Animation_fjrip"]
 length = 0.001
@@ -72,6 +46,35 @@ tracks/1/keys = {
 "values": [Vector3(-0.28259277, -1.9498311, 1.156102)]
 }
 
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "shoot"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera/equipped_fan:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.060000002, 0.11, 0.22, 0.4),
+"transitions": PackedFloat32Array(1, 0.6597539, 0.70710677, 1.3195081, 1),
+"update": 0,
+"values": [Vector3(0.586, -0.437, -0.716), Vector3(0.681, -0.447, -0.686), Vector3(-0.269, -0.417, -0.881), Vector3(-0.439, -0.417, -0.86), Vector3(0.586, -0.437, -0.716)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera/equipped_fan:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.060000002, 0.11, 0.22, 0.31, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1.1095695, 1),
+"update": 0,
+"values": [Vector3(-0.28274333, -1.9495327, 0.18849556), Vector3(-0.2565634, -2.6249752, 1.134464), Vector3(0.7270897, -0.46771348, 1.9392229), Vector3(0.46774822, -0.02443461, 1.8273597), Vector3(0.38048178, -1.2339478, 1.3159783), Vector3(-0.28274333, -1.9495327, 0.18849556)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjrip"]
 _data = {
 &"RESET": SubResource("Animation_fjrip"),
@@ -84,7 +87,6 @@ script = ExtResource("1_g2els")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_g2els")
 
 [node name="Body_Collider" type="CollisionShape3D" parent="."]
@@ -102,10 +104,6 @@ collision_mask = 13
 [node name="Rope" parent="Head/Camera" instance=ExtResource("4_qlg0r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27126157, -0.24065858, -0.572635)
 visible = false
-
-[node name="Rope_Raycast" type="RayCast3D" parent="Head/Camera/Rope"]
-target_position = Vector3(0, 0, -0.5)
-collision_mask = 13
 
 [node name="Crosshair" type="TextureRect" parent="Head/Camera"]
 anchors_preset = 8
@@ -142,13 +140,18 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="equipped_fan" parent="Head/Camera" instance=ExtResource("5_smehm")]
-transform = Transform3D(0.08801059, 0.4430363, -0.8921732, 0.87893724, 0.38692906, 0.2788465, 0.4687469, -0.8087056, -0.3553472, 0.6160296, -0.4170484, -0.68629694)
+transform = Transform3D(0.08801058, 0.4430363, -0.8921732, 0.8789371, 0.38692906, 0.2788465, 0.46874684, -0.8087056, -0.3553472, 0.6160296, -0.4170484, -0.68629694)
+visible = false
 
 [node name="Animation" type="AnimationPlayer" parent="Head/Camera/equipped_fan"]
 root_node = NodePath("../../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_fjrip")
 }
+
+[node name="equipped_boomerang" parent="Head/Camera" instance=ExtResource("6_smehm")]
+transform = Transform3D(-0.0008995421, -0.10130383, -0.22855353, -0.18463038, -0.15382823, 0.06890934, -0.16855508, 0.16903967, -0.07426156, 0.55, -0.215, -0.625)
+visible = false
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 
@@ -161,5 +164,9 @@ rope = NodePath("../Head/Camera/Rope")
 script = ExtResource("7_fjrip")
 equipped_fan = NodePath("../Head/Camera/equipped_fan")
 item_aim = NodePath("../Head/Camera/Aim")
+
+[node name="BoomerangController" type="Node" parent="." node_paths=PackedStringArray("equipped_boomerang")]
+script = ExtResource("9_ur7pv")
+equipped_boomerang = NodePath("../Head/Camera/equipped_boomerang")
 
 [connection signal="timeout" from="Coyote_Timer" to="." method="on_coyote_timeout"]

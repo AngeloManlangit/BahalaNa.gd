@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvv1nax1yqlrh"]
+
+[ext_resource type="PackedScene" uid="uid://dy6ptb2nhp1jx" path="res://items/weapons/boomerang.glb" id="1_m4xa5"]
+
+[node name="boomerang" instance=ExtResource("1_m4xa5")]

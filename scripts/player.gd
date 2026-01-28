@@ -36,9 +36,11 @@ var aim_direction
 # fan
 @onready var fan_controller: Node = $FanController
 
+# boomerang
+@onready var boomerang_controller: Node = $BoomerangController
+
 # sticky hand
 @onready var sh_controller: Node = $StickyHandController
-@onready var rope_raycast: RayCast3D = $Head/Camera/Rope/Rope_Raycast
 
 # UI
 @onready var uses_label: Label = $Head/Camera/Temp_UI/Uses
@@ -47,6 +49,7 @@ var aim_direction
 func _ready():
 	capture_mouse()
 	fan_controller.equipped_fan.visible = false
+	boomerang_controller.equipped_boomerang.visible = false
 	sh_controller.rope.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -127,20 +130,23 @@ func _physics_process(delta: float) -> void:
 							equipped = items.FIST
 			items.BOOMERANG:
 				# Boomerang logic
-				item_animation = $Head/Camera/equipped_fan/Animation
+				boomerang_controller.equipped_boomerang.visible = true
+					
 			items.STICKY_HAND:
 				# sticky hand logic
-				item_animation = $Head/Camera/equipped_fan/Animation
 				if Input.is_action_just_pressed("shoot"):
 					allow_input = false
 					sh_controller.launch_hand()
 				
-				if Input.is_action_just_released("shoot") || rope_raycast.is_colliding():
-					allow_input = true
+				if Input.is_action_just_released("shoot"):
+					item_uses -= 1
 					sh_controller.retract_hand()
 	
 				if sh_controller.launched:
 					sh_controller.handle_grapple(delta)
+					
+				if item_uses == 0:
+					equipped = items.FIST
 		
 				sh_controller.update_rope()
 				
@@ -169,6 +175,14 @@ func release_mouse():
 # item functions
 # pickup
 func pickup(picked_up_item: String):
+	match equipped:
+		items.FAN:
+			fan_controller.hide_self()
+		items.BOOMERANG:
+			boomerang_controller.hide_self()
+		items.STICKY_HAND:
+			sh_controller.hide_self()
+	
 	if picked_up_item == "FAN":
 		equipped = items.FAN
 		item_uses = 5

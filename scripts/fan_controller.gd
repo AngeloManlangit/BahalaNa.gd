@@ -1,7 +1,7 @@
 extends Node
 
 @export var equipped_fan: Node3D
-var fan_cooldown_time: float = 0.3
+var fan_cooldown_time: float = 0.5
 var windslash = load("res://scenes/windslash.tscn")
 var instance
 
@@ -27,3 +27,6 @@ func fan_blast(blast_power: float):
 	
 func on_fan_blast_timeout():
 	player.allow_input = true
+	
+func hide_self():
+	equipped_fan.visible = false

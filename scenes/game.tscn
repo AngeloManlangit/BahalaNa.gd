@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=21 format=3 uid="uid://d4nddivpwn6q6"]
 
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
@@ -42,6 +42,12 @@ left_to_right = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p57ef"]
 size = Vector3(1.6679688, 1.4421844, 0.8318969)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gee14"]
+size = Vector3(1.6865234, 1.3769531, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0tnpc"]
+size = Vector3(1.2001953, 3.225586, 1.0585938)
 
 [node name="Game" type="Node3D"]
 
@@ -180,7 +186,7 @@ height = 7.667366
 script = ExtResource("5_p57ef")
 
 [node name="Pickup_Fan" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8506019, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4243256, -0.8506019, -3.0239162)
 collision_layer = 8
 
 [node name="pickup_fan" parent="Pickup_Fan" instance=ExtResource("5_iywne")]
@@ -190,11 +196,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56932116, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8323541, 0.07163805)
 shape = SubResource("BoxShape3D_p57ef")
 
-[node name="pickup_boomerang" parent="Pickup_Fan" instance=ExtResource("6_gee14")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1409824, 1.1345148, 2.3545325)
-
-[node name="pickup_stickyhand" parent="Pickup_Fan" instance=ExtResource("7_0tnpc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0759473, 1.1345143, 3.576338)
-
 [node name="Buildings" parent="." instance=ExtResource("6_p57ef")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.965458, 0.118392944, 110.27506)
+visible = false
+
+[node name="Pickup_Boomerang" type="Area3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.567759, 0, 3.4877048)
+collision_layer = 8
+
+[node name="pickup_boomerang" parent="Pickup_Boomerang" instance=ExtResource("6_gee14")]
+
+[node name="Pickup_Boomerang_Collider" type="CollisionShape3D" parent="Pickup_Boomerang"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03515625, 1.0592866, 0.09534693)
+shape = SubResource("BoxShape3D_gee14")
+
+[node name="Pickup_StickyHand" type="Area3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.184413, 0, 6.751776)
+collision_layer = 8
+
+[node name="pickup_stickyhand" parent="Pickup_StickyHand" instance=ExtResource("7_0tnpc")]
+
+[node name="Pickup_StickyHand_Collider" type="CollisionShape3D" parent="Pickup_StickyHand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034896493, 1.8573817, 0.07998383)
+shape = SubResource("BoxShape3D_0tnpc")

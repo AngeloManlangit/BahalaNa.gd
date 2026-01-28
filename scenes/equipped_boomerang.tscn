@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs6cc2tumftx8"]
+
+[ext_resource type="PackedScene" uid="uid://dvv1nax1yqlrh" path="res://items/weapons/boomerang.tscn" id="1_eupfh"]
+
+[node name="equipped_boomerang" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="boomerang" parent="." instance=ExtResource("1_eupfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44488412, 0)

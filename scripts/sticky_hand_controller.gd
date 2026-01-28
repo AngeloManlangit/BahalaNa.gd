@@ -5,17 +5,19 @@ extends Node
 
 @onready var player: CharacterBody3D = get_parent()
 
+
 var force := Vector3.ZERO
 const PULL_FORCE_STRENGTH: float = 100.0
 var target: Vector3
 var launched: bool = false
 	
-func launch_hand():
+func launch_hand():	
 	if ray.is_colliding():
 		target = ray.get_collision_point()
 		launched = true
 
 func retract_hand():
+	player.allow_input = true
 	launched = false
 	
 func handle_grapple(delta: float):
@@ -43,3 +45,6 @@ func update_rope():
 	rope.look_at(target)
 	rope.scale = Vector3(1, 1, distance)
 	
+func hide_self():
+	rope.visible = false
+	retract_hand()
