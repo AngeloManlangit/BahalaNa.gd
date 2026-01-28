@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=3 uid="uid://b8c1r512affx7"]
+
+[ext_resource type="Script" uid="uid://3novdrrtxqa5" path="res://scripts/UI/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://dm0vmkoqlntuj" path="res://assets/UI/bg.jpg" id="2_bqqt6"]
+[ext_resource type="VideoStream" uid="uid://c2ddfnobe8c57" path="res://assets/UI/bacpn.ogv" id="2_ekxnf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
+texture = ExtResource("2_bqqt6")
+modulate_color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vue75"]
+bg_color = Color(0.7436407, 0.4963568, 0.7088388, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.28627452)
+shadow_size = 5
+shadow_offset = Vector2(1.22, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(0.2726317, 0.47564554, 0.5496727, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.28627452)
+shadow_size = 5
+shadow_offset = Vector2(1.22, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
+bg_color = Color(0.34124258, 0.6214784, 0.84813845, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.28627452)
+shadow_size = 5
+shadow_offset = Vector2(1.22, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 313.0
+offset_top = 3.0
+offset_right = 313.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_wu84c")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -818.0
+offset_top = 4.0
+offset_right = -818.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_wu84c")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -258.5
+offset_top = -190.0
+offset_right = 258.5
+offset_bottom = 118.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+text = "START IT BBY"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
+text = "Options"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
+text = "Exit ;_;
+"
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("2_ekxnf")
+volume_db = -18.95
+loop = true
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
