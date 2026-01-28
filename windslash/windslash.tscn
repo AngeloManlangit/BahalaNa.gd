@@ -1,0 +1,138 @@
+[gd_scene load_steps=25 format=3 uid="uid://cw3o2dawt2a86"]
+
+[ext_resource type="PackedScene" uid="uid://bebwqwrn8grjx" path="res://windslash/windslash.glb" id="1_pvjpw"]
+[ext_resource type="Texture2D" uid="uid://c1wqust2notv4" path="res://windslash/assets/Gradient02.png" id="2_mwk31"]
+[ext_resource type="Shader" uid="uid://bi61ijhjl4n5" path="res://windslash/material_01.tres" id="3_gc4qc"]
+[ext_resource type="Texture2D" uid="uid://dnuraj3wkjwj" path="res://windslash/assets/Gradient01.png" id="4_sgt4i"]
+[ext_resource type="ArrayMesh" uid="uid://cl16ajxbqbh84" path="res://windslash/ProjectileMesh02.obj" id="5_njk3w"]
+[ext_resource type="Shader" uid="uid://b6ufujwyn2i6n" path="res://windslash/texture_scroll.tres" id="6_h0hpf"]
+[ext_resource type="Texture2D" uid="uid://cm56x720qr70v" path="res://windslash/assets/Noise01.png" id="7_0sma6"]
+[ext_resource type="Texture2D" uid="uid://l3n8hvrhi54i" path="res://windslash/assets/Flare01.PNG" id="8_kfoda"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gb7yq"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("2_mwk31")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1ic6"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_mwk31")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujp2k"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1.0318831, 0, 0.07233818, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydkwm"]
+render_priority = 0
+shader = ExtResource("3_gc4qc")
+shader_parameter/Texture = ExtResource("4_sgt4i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7cstk"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 0.9
+color = Color(0.81191015, 4.10074e-05, 0.23257521, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p57nl"]
+render_priority = 0
+shader = ExtResource("6_h0hpf")
+shader_parameter/TextureTiling01 = Vector2(1, 1)
+shader_parameter/Vector2Parameter = Vector2(0, -3)
+shader_parameter/MainTex = ExtResource("7_0sma6")
+shader_parameter/GradientTex = ExtResource("4_sgt4i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eq8x1"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 0.9
+color = Color(0.9337876, 0, 0.22306511, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7avg"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(4.30031, 0, 0.6121967, 1)
+albedo_texture = ExtResource("8_kfoda")
+
+[sub_resource type="Gradient" id="Gradient_wntul"]
+offsets = PackedFloat32Array(0, 0.3546798)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bqpn2"]
+gradient = SubResource("Gradient_wntul")
+
+[sub_resource type="Curve" id="Curve_dkbjb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_6r804"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0b8mw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ghsyk"]
+curve_x = SubResource("Curve_dkbjb")
+curve_y = SubResource("Curve_6r804")
+curve_z = SubResource("Curve_0b8mw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mfdh1"]
+particle_flag_align_y = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.2, 2)
+spread = 2.0
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_curve = SubResource("CurveXYZTexture_ghsyk")
+color_ramp = SubResource("GradientTexture1D_bqpn2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8kd1o"]
+
+[node name="windslash" instance=ExtResource("1_pvjpw")]
+
+[node name="Circle" parent="." index="0"]
+transform = Transform3D(1.5935907, -0.007977539, -0.4115201, -0.0048447163, 1.725292, -0.037020665, 0.47750375, 0.04412841, 1.3730055, -0.83761466, -0.20283768, -0.2325949)
+material_override = SubResource("StandardMaterial3D_gb7yq")
+
+[node name="Circle_002" parent="." index="1"]
+transform = Transform3D(1.8854592, -0.017735198, -0.6022744, -0.006434307, 6.390233, -0.036630318, 0.615552, 0.12112011, 1.8444067, -1.2277986, -0.30802962, -0.10808537)
+material_override = SubResource("StandardMaterial3D_s1ic6")
+
+[node name="Circle_001" parent="." index="2"]
+transform = Transform3D(2.262227, 0.0031764265, -0.32258108, -0.0074192355, 7.260995, -0.04146861, 0.33573005, 0.1390558, 2.1727102, -1.5212551, -0.2725713, -0.13530436)
+material_override = SubResource("StandardMaterial3D_ujp2k")
+
+[node name="windlash_trail" type="GPUParticles3D" parent="." index="3"]
+transform = Transform3D(-0.04978595, 0, -0.55499053, 0, 0.3681874, 0, 0.5825202, 0, -0.047433108, -2.7174308, -0.14581335, -0.2807415)
+sorting_offset = -2.0
+material_override = SubResource("ShaderMaterial_ydkwm")
+amount = 1
+lifetime = 0.7
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_7cstk")
+draw_pass_1 = ExtResource("5_njk3w")
+
+[node name="windslash_trail2" type="GPUParticles3D" parent="." index="4"]
+transform = Transform3D(-0.08819893, 0, -0.99610287, 0, 1, 0, 0.9961028, 0, -0.08819893, -2.7954729, -0.17384946, -0.23001803)
+material_override = SubResource("ShaderMaterial_p57nl")
+amount = 1
+lifetime = 0.7
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_eq8x1")
+draw_pass_1 = ExtResource("5_njk3w")
+
+[node name="windslash_particles" type="GPUParticles3D" parent="." index="5"]
+transform = Transform3D(0.99919665, 0, -0.03440407, 0, 1, 0, 0.03861228, 0, 0.8902979, -3.2714238, -0.0046161413, -0.22873707)
+material_override = SubResource("StandardMaterial3D_n7avg")
+amount = 25
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_mfdh1")
+draw_pass_1 = SubResource("QuadMesh_8kd1o")

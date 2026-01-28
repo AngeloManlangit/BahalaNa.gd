@@ -1,20 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://de8ejodvthrhx"]
+[gd_scene load_steps=3 format=3 uid="uid://de8ejodvthrhx"]
 
 [ext_resource type="Script" uid="uid://b73hvlvrtt68x" path="res://scripts/windslash.gd" id="1_g17au"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wlw5"]
-transparency = 1
-albedo_color = Color(0, 1, 1, 0.4509804)
-
-[sub_resource type="PrismMesh" id="PrismMesh_g17au"]
+[ext_resource type="PackedScene" uid="uid://cw3o2dawt2a86" path="res://windslash/windslash.tscn" id="2_j2y46"]
 
 [node name="Windslash" type="Node3D"]
 script = ExtResource("1_g17au")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.7425207, 0, 0, 0, 2.519816e-08, 0.16682354, 0, -0.19215557, 2.1876266e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_4wlw5")
-mesh = SubResource("PrismMesh_g17au")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -0.25)
@@ -22,5 +12,8 @@ target_position = Vector3(0, 0, -0.25)
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="windslash" parent="." instance=ExtResource("2_j2y46")]
+transform = Transform3D(0.0053406265, 0, -0.99998575, 0, 1, 0, 0.99998575, 0, 0.0053406265, -0.104374886, 0, 3.9939165)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

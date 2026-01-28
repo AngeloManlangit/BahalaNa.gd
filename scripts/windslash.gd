@@ -2,7 +2,7 @@ extends Node3D
 
 const SPEED = 30.0
 
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var windslash: Node3D = $windslash
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	position += transform.basis * Vector3(0, 0, -SPEED) * delta
 	
 	if ray_cast_3d.is_colliding():
-		mesh_instance_3d.visible = false
+		windslash.visible = false
 		await get_tree().create_timer(2.0).timeout
 		queue_free()
 
