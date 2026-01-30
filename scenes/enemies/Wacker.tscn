@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=4 uid="uid://dvronhavsvuvf"]
 
-[ext_resource type="Script" uid="uid://bb10i0q4lryk7" path="res://scripts/wacker.gd" id="1_s7bn3"]
+[ext_resource type="Script" path="res://scripts/wacker.gd" id="1_s7bn3"]
 [ext_resource type="Texture2D" uid="uid://eoy72phpg5fj" path="res://assets/Enemies/Wacker/Chapa 2nd_0.png" id="2_2hac7"]
 [ext_resource type="AnimationLibrary" uid="uid://b4kq1yy8jmhot" path="res://assets/Enemies/Wacker/Warrior Idle.fbx" id="3_e6d4v"]
 

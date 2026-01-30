@@ -52,3 +52,4 @@ func update_rope():
 func hide_self():
 	rope.visible = false
 	retract_hand()
+	equipped_stickyhand.visible = false

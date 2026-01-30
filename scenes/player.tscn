@@ -178,6 +178,7 @@ speed_scale = 0.75
 
 [node name="equipped_stickyhand" parent="Head/Camera" instance=ExtResource("8_3v2ag")]
 transform = Transform3D(0.725, 0, 0, 0, 1, 0, 0, 0, 1, 0.92, -0.98, -0.39)
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Head"]
 
