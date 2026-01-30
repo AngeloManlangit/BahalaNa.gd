@@ -14,6 +14,10 @@ func _process(delta: float) -> void:
 	position += transform.basis * Vector3(0, 0, -SPEED) * delta
 	
 	if ray_cast_3d.is_colliding():
+		var collider = ray_cast_3d.get_collider()
+		if collider.is_in_group("enemy"):
+			collider.take_damage()
+			
 		windslash.visible = false
 		await get_tree().create_timer(2.0).timeout
 		queue_free()

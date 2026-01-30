@@ -1,7 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://d4nddivpwn6q6"]
+[gd_scene load_steps=23 format=3 uid="uid://d4nddivpwn6q6"]
 
+[ext_resource type="PackedScene" path="res://scenes/enemies/Wacker.tscn" id="1_gee14"]
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Taser.tscn" id="2_vtaks"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Blocker.tscn" id="3_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://beovagt1dwo1b" path="res://scenes/vince_ball.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://csm0g4hjajgt5" path="res://scenes/pickup_fan.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
@@ -49,6 +52,14 @@ size = Vector3(1.6865234, 1.3769531, 1)
 size = Vector3(1.2001953, 3.225586, 1.0585938)
 
 [node name="Game" type="Node3D"]
+
+[node name="Wacker" parent="." instance=ExtResource("1_gee14")]
+
+[node name="Taser" parent="." instance=ExtResource("2_vtaks")]
+transform = Transform3D(1.3741655, 0, 0, 0, 1.3741655, 0, 0, 0, 1.3741655, 8.990853, 0, 1.6053858)
+
+[node name="Blocker" parent="." instance=ExtResource("3_kvpfn")]
+transform = Transform3D(0.49893913, 0, 0, 0, 0.49893913, 0, 0, 0, 0.49893913, 2.8463125, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 unique_name_in_owner = true
