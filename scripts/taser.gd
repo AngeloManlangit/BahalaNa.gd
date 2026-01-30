@@ -57,8 +57,8 @@ func handle_shooting_cycle():
 	await timer.timeout
 	is_shooting = false # UNLOCK: Now the AI can look for a new shot
 func attack():
-	print(target.health_points )
-	target.health_points  -= 1
+	if target.has_method("take_damage"):
+		target.take_damage()
 	print(target.health_points )
 func take_damage():
 	print("hit")

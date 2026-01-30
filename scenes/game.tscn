@@ -1,10 +1,10 @@
 [gd_scene load_steps=23 format=3 uid="uid://d4nddivpwn6q6"]
 
-[ext_resource type="PackedScene" path="res://scenes/enemies/Wacker.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://dvronhavsvuvf" path="res://scenes/enemies/Wacker.tscn" id="1_gee14"]
 [ext_resource type="Texture2D" uid="uid://dtt44a1noih4v" path="res://assets/vince.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbcsaqa08rnq3" path="res://scenes/player.tscn" id="2_lnu2h"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/Taser.tscn" id="2_vtaks"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/Blocker.tscn" id="3_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cmkq2g1sdb6fn" path="res://scenes/enemies/Taser.tscn" id="2_vtaks"]
+[ext_resource type="PackedScene" uid="uid://dyqrdffph4d2t" path="res://scenes/enemies/Blocker.tscn" id="3_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://beovagt1dwo1b" path="res://scenes/vince_ball.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://csm0g4hjajgt5" path="res://scenes/pickup_fan.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://shj6k1gbfdwm" path="res://scripts/game_manager.gd" id="5_p57ef"]
@@ -54,12 +54,15 @@ size = Vector3(1.2001953, 3.225586, 1.0585938)
 [node name="Game" type="Node3D"]
 
 [node name="Wacker" parent="." instance=ExtResource("1_gee14")]
+collision_mask = 2
 
 [node name="Taser" parent="." instance=ExtResource("2_vtaks")]
 transform = Transform3D(1.3741655, 0, 0, 0, 1.3741655, 0, 0, 0, 1.3741655, 8.990853, 0, 1.6053858)
+collision_mask = 2
 
 [node name="Blocker" parent="." instance=ExtResource("3_kvpfn")]
 transform = Transform3D(0.49893913, 0, 0, 0, 0.49893913, 0, 0, 0, 0.49893913, 2.8463125, 0, 0)
+collision_mask = 2
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
 unique_name_in_owner = true
@@ -200,7 +203,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4243256, -0.8506019, -3.02
 collision_layer = 8
 
 [node name="pickup_fan" parent="Pickup_Fan" instance=ExtResource("5_iywne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56932116, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5825987, 0)
 
 [node name="Pickup_Fan_Collider" type="CollisionShape3D" parent="Pickup_Fan"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8323541, 0.07163805)

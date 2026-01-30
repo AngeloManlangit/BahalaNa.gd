@@ -36,7 +36,8 @@ func _physics_process(delta: float) -> void:
 		animationPlayer.play("shutdown/mixamo_com")		
 
 func attack():
-	target.health_points  -= 1
+	if target.has_method("take_damage"):
+		target.take_damage()
 	var knockback_dir = (target.global_position - global_position).normalized() 
 	target.velocity = knockback_dir * 7 #the number is knockback strength
 	target.velocity.y = 2 #slight lift

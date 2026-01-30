@@ -4,6 +4,16 @@ extends CharacterBody3D
 var health_points = 2 # default: 2
 var item_uses = 5 # default: 5
 
+# on screen damage overlay
+@onready var damage_overlay: ColorRect = $Head/CanvasLayer/damage_overlay
+@onready var rng = RandomNumberGenerator.new()
+
+@export var fall_shake_threshold: float = -12.0 
+
+# screen shake
+var shake_strength: float = 0.0
+var shake_decay: float = 5.0
+
 # movement variables
 const SPEED = 7.0
 const JUMP_VELOCITY = 6.0
@@ -31,7 +41,7 @@ var jump_buffer: bool = false
 
 # items
 enum items { FIST, FAN, BOOMERANG, STICKY_HAND }
-var equipped := items.STICKY_HAND # default is fist
+var equipped := items.FIST # default is fist
 
 @onready var item_animation: AnimationPlayer
 @onready var item_aim: RayCast3D = $Head/Camera/Aim
@@ -69,7 +79,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _process(delta: float) -> void:
 	uses_label.text = "Uses: " + str(item_uses)
-	
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0.0, shake_decay * delta)
+		
+		var offset = Vector2(
+			rng.randf_range(-shake_strength, shake_strength),
+			rng.randf_range(-shake_strength, shake_strength)
+		)
+		
+		# apply shake to camera
+		camera.h_offset = offset.x
+		camera.v_offset = offset.y
 
 func _physics_process(delta: float) -> void:	
 	# Add the gravity.
@@ -179,7 +199,13 @@ func _physics_process(delta: float) -> void:
 		boomerang_controller.equipped_boomerang.visible = false
 		boomerang_controller.throw(delta)
 		
+	var last_y_velocity = velocity.y
+		
 	move_and_slide()
+	
+	if is_on_floor() and last_y_velocity < fall_shake_threshold:
+		shake_strength = abs(last_y_velocity) * 0.05
+		shake_strength = clamp(shake_strength, 0.2, 0.4)
 
 # movement functions
 func Jump() -> void:
@@ -226,3 +252,46 @@ func pickup(picked_up_item: String):
 func punch():
 	print("one punch")
 	pass
+
+func take_damage():
+	if health_points > 0:
+		health_points -= 1
+		
+		# trigger Screen Shake
+		shake_strength = 0.5 # adjust for more violent shake
+		
+		# update Visuals
+		update_blood_overlay()
+		
+		if health_points <= 0:
+			die()
+			
+func update_blood_overlay():
+	if !damage_overlay: return
+	var mat = damage_overlay.material as ShaderMaterial
+	
+	# tween the values for smooth transition
+	var tween = create_tween().set_parallel(true)
+	
+	if health_points == 2:
+		# healthy: clear screen
+		tween.tween_property(mat, "shader_parameter/effect_strength", 0.0, 0.5)
+		tween.tween_property(mat, "shader_parameter/pulse_speed", 0.0, 0.5)
+		tween.tween_property(mat, "shader_parameter/radius", 0.8, 0.5)
+		
+	elif health_points == 1:
+		# hurt: red veins + pulsing
+		tween.tween_property(mat, "shader_parameter/vignette_color", Color(0.3, 0.0, 0.0), 0.5)
+		tween.tween_property(mat, "shader_parameter/radius", 0.7, 0.5)
+		tween.tween_property(mat, "shader_parameter/effect_strength", 0.6, 0.5)
+		tween.tween_property(mat, "shader_parameter/pulse_speed", 5.0, 0.5)
+		
+	elif health_points <= 0:
+		# dead: turn screen black
+		tween.tween_property(mat, "shader_parameter/vignette_color", Color(0.0, 0.0, 0.0), 0.2)
+		tween.tween_property(mat, "shader_parameter/radius", 0.4, 0.5)
+		tween.tween_property(mat, "shader_parameter/effect_strength", 1, 0.2)
+
+func die():
+	print("Player Died")
+	# Add your game over logic here
