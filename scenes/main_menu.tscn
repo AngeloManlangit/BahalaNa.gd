@@ -1,16 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8c1r512affx7"]
+[gd_scene load_steps=18 format=3 uid="uid://b8c1r512affx7"]
 
 [ext_resource type="Script" uid="uid://3novdrrtxqa5" path="res://scripts/UI/main_menu.gd" id="1_l6cm7"]
-[ext_resource type="Texture2D" uid="uid://dm0vmkoqlntuj" path="res://assets/UI/bg.jpg" id="2_bqqt6"]
-[ext_resource type="VideoStream" uid="uid://c2ddfnobe8c57" path="res://assets/UI/bacpn.ogv" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://c886tvmt67tma" path="res://assets/UI/MainMenuBG.png" id="2_8ln24"]
+[ext_resource type="FontFile" uid="uid://w7rdx0xfxjxp" path="res://assets/fonts/ZeroCool/ZeroCool.ttf" id="3_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://byu2rv0sojnrm" path="res://scenes/loading.tscn" id="4_wu84c"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
-texture = ExtResource("2_bqqt6")
-modulate_color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+[ext_resource type="Texture2D" uid="uid://bye4k0636mrv6" path="res://assets/UI/ye.svg" id="5_oa1go"]
+[ext_resource type="PackedScene" uid="uid://dvv1nax1yqlrh" path="res://items/weapons/boomerang.tscn" id="6_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://4j54mu060wld" path="res://items/weapons/handfan.tscn" id="7_tbmy8"]
+[ext_resource type="PackedScene" uid="uid://dgpr0hq1rl5a8" path="res://items/weapons/sticky hand.glb" id="8_jk1qb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vue75"]
-bg_color = Color(0.7436407, 0.4963568, 0.7088388, 1)
+bg_color = Color(1, 1, 1, 0)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -30,7 +35,11 @@ shadow_size = 5
 shadow_offset = Vector2(1.22, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
-bg_color = Color(0.34124258, 0.6214784, 0.84813845, 1)
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -43,6 +52,47 @@ shadow_offset = Vector2(1.22, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
 
+[sub_resource type="Environment" id="Environment_rtw2f"]
+
+[sub_resource type="Animation" id="Animation_oa1go"]
+resource_name = "spin"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tbmy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -2.0594885, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk1qb"]
+_data = {
+&"RESET": SubResource("Animation_tbmy8"),
+&"spin": SubResource("Animation_oa1go")
+}
+
 [node name="Main Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -52,85 +102,121 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 313.0
-offset_top = 3.0
-offset_right = 313.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_wu84c")
-
-[node name="Panel2" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -818.0
-offset_top = 4.0
-offset_right = -818.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_wu84c")
+[node name="MainMenuBg" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(0.67685187, 0.67685187)
+texture = ExtResource("2_8ln24")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -258.5
-offset_top = -190.0
-offset_right = 258.5
-offset_bottom = 118.5
-grow_horizontal = 2
+offset_left = 34.53
+offset_top = -100.994995
+offset_right = 539.0
+offset_bottom = 130.0
+grow_horizontal = 0
 grow_vertical = 2
-theme_override_constants/separation = 13
+theme_override_constants/separation = 10
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "START IT BBY"
+text = "START"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
-text = "Options"
+text = "CREDITS"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 30
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
-text = "Exit ;_;
-"
+text = "Exit ;_;"
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+[node name="Ye" type="Sprite2D" parent="."]
+position = Vector2(277.00003, 132)
+scale = Vector2(0.7809522, 0.78095233)
+texture = ExtResource("5_oa1go")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-stream = ExtResource("2_ekxnf")
-volume_db = -18.95
-loop = true
+offset_left = 652.0
+offset_top = 84.0
+offset_right = 1256.0
+offset_bottom = 652.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(604, 568)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 3.5784335)
+environment = SubResource("Environment_rtw2f")
+
+[node name="boomerang" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_rtw2f")]
+transform = Transform3D(-0.5093767, 0, -0.9138507, 0, 1, 0, 0.95799816, 0, -0.48590305, 3.228, 0.195, 3.578)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/boomerang"]
+libraries = {
+&"": SubResource("AnimationLibrary_jk1qb")
+}
+autoplay = "spin"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.7815205, 0.3771971, -0.49693877, 0, 0.79652995, 0.6045992, 0.6238796, 0.4725066, -0.6225045, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="handfan" parent="SubViewportContainer/SubViewport" instance=ExtResource("7_tbmy8")]
+transform = Transform3D(-0.010797846, 0, -0.020307794, 0, 0.023, 0, 0.020307794, 0, -0.010797846, 3.228, -0.861, 3.578)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/handfan"]
+libraries = {
+&"": SubResource("AnimationLibrary_jk1qb")
+}
+autoplay = "spin"
+
+[node name="sticky hand" parent="SubViewportContainer/SubViewport" instance=ExtResource("8_jk1qb")]
+transform = Transform3D(-0.5962289, 0, -1.1213434, 0, 1.27, 0, 1.1213434, 0, -0.5962289, 3.228, -4.715991, 3.578)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/sticky hand"]
+libraries = {
+&"": SubResource("AnimationLibrary_jk1qb")
+}
+autoplay = "spin"
 
 [node name="Loading" parent="." instance=ExtResource("4_wu84c")]
 visible = false
@@ -139,3 +225,5 @@ layout_mode = 1
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+
+[editable path="SubViewportContainer/SubViewport/boomerang"]
