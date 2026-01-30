@@ -140,7 +140,11 @@ theme_override_font_sizes/font_size = 32
 text = "Uses: "
 
 [node name="equipped_fan" parent="Head/Camera" instance=ExtResource("5_smehm")]
+<<<<<<< Updated upstream
 transform = Transform3D(0.08801055, 0.4430363, -0.89217293, 0.8789369, 0.38692906, 0.2788464, 0.4687467, -0.8087056, -0.35534707, 0.6160296, -0.4170484, -0.68629694)
+=======
+transform = Transform3D(0.08801055, 0.4430363, -0.8921731, 0.8789369, 0.38692906, 0.27884647, 0.4687467, -0.8087056, -0.35534716, 0.6160296, -0.4170484, -0.68629694)
+>>>>>>> Stashed changes
 visible = false
 
 [node name="Animation" type="AnimationPlayer" parent="Head/Camera/equipped_fan"]

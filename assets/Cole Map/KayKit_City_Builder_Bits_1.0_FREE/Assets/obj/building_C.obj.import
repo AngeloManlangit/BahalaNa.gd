@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cq2yg012nc1bo"
+path="res://.godot/imported/building_C.obj-21cf79816c6b50a19483838e08ea0a75.mesh"
+
+[deps]
+
+files=["res://.godot/imported/building_C.obj-21cf79816c6b50a19483838e08ea0a75.mesh"]
+
+source_file="res://assets/Cole Map/KayKit_City_Builder_Bits_1.0_FREE/Assets/obj/building_C.obj"
+dest_files=["res://.godot/imported/building_C.obj-21cf79816c6b50a19483838e08ea0a75.mesh", "res://.godot/imported/building_C.obj-21cf79816c6b50a19483838e08ea0a75.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

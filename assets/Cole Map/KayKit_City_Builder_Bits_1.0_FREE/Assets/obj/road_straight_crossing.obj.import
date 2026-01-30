@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dn0mjtsjlu6br"
+path="res://.godot/imported/road_straight_crossing.obj-c86c6c245e1e220e0744f5e3899c98e0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/road_straight_crossing.obj-c86c6c245e1e220e0744f5e3899c98e0.mesh"]
+
+source_file="res://assets/Cole Map/KayKit_City_Builder_Bits_1.0_FREE/Assets/obj/road_straight_crossing.obj"
+dest_files=["res://.godot/imported/road_straight_crossing.obj-c86c6c245e1e220e0744f5e3899c98e0.mesh", "res://.godot/imported/road_straight_crossing.obj-c86c6c245e1e220e0744f5e3899c98e0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
