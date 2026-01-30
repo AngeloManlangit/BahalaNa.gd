@@ -1,6 +1,7 @@
 extends Control
 
 @onready var video_stream_player: VideoStreamPlayer = $VideoStreamPlayer
+@onready var loading: Control = $Loading
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,7 +10,7 @@ func _ready() -> void:
 
 func _on_start_pressed() -> void:
 	print("Start Pressed")
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	loading.load_scene("res://scenes/game.tscn")
 
 func _on_options_pressed() -> void:
 	print("Options Pressed")

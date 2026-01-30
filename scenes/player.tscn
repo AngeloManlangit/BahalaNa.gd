@@ -139,7 +139,7 @@ theme_override_font_sizes/font_size = 32
 text = "Uses: "
 
 [node name="equipped_fan" parent="Head/Camera" instance=ExtResource("5_smehm")]
-transform = Transform3D(0.08801055, 0.4430363, -0.89217305, 0.8789369, 0.38692906, 0.27884647, 0.4687467, -0.8087056, -0.35534716, 0.6160296, -0.4170484, -0.68629694)
+transform = Transform3D(0.08801055, 0.4430363, -0.892173, 0.8789369, 0.38692906, 0.27884644, 0.4687467, -0.8087056, -0.35534713, 0.6160296, -0.4170484, -0.68629694)
 visible = false
 
 [node name="Animation" type="AnimationPlayer" parent="Head/Camera/equipped_fan"]
@@ -154,6 +154,9 @@ visible = false
 
 [node name="acceleration" parent="Head/Camera" instance=ExtResource("7_d2wvv")]
 transform = Transform3D(0.006387487, 0, -0.89094424, 0, 0.9999999, 0, 0.99992186, 0, 0.0056913537, 0, 0, -1.9542503)
+amount = 20
+amount_ratio = 0.1683
+speed_scale = 0.75
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 
