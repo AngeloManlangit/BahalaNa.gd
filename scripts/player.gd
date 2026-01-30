@@ -11,6 +11,10 @@ const MOUSE_SENSITIVITY = 0.005
 const weight = 7.0
 var mouse_captured: bool
 
+# acceleration
+@export var acceleration_particles: GPUParticles3D
+@export var activation_speed: float = 8.0
+
 # for the coyote time
 @export var coyote_time: float = 0.2
 @onready var coyote_timer: Timer = $Coyote_Timer
@@ -103,7 +107,17 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = lerp(velocity.x, direction.x * SPEED, delta * weight)
 			velocity.z = lerp(velocity.z, direction.z * SPEED, delta * weight)
-	
+			
+	# acceleration effect
+	if acceleration_particles:
+		var current_speed = velocity.length()
+		if current_speed > activation_speed:
+			if not acceleration_particles.emitting:
+				acceleration_particles.emitting = true
+		else:
+			if acceleration_particles.emitting:
+				acceleration_particles.emitting = false
+				
 	# using item
 	if mouse_captured:
 		match equipped:
