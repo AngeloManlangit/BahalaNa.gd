@@ -53,6 +53,7 @@ func _ready():
 	capture_mouse()
 	fan_controller.equipped_fan.visible = false
 	boomerang_controller.equipped_boomerang.visible = false
+	sh_controller.equipped_stickyhand.visible = false
 	sh_controller.rope.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -122,7 +123,6 @@ func _physics_process(delta: float) -> void:
 	if mouse_captured:
 		match equipped:
 			items.FIST:
-				item_animation = $Head/Camera/equipped_fan/Animation
 				if Input.is_action_just_pressed("shoot"):
 					punch()
 			items.FAN:
@@ -154,9 +154,13 @@ func _physics_process(delta: float) -> void:
 					equipped = items.FIST
 			items.STICKY_HAND:
 				# sticky hand logic
+				sh_controller.equipped_stickyhand.visible = true
 				if Input.is_action_just_pressed("shoot"):
 					allow_input = false
 					sh_controller.launch_hand()
+				
+				if Input.is_action_pressed("shoot"):
+					sh_controller.equipped_stickyhand.visible = false
 				
 				if Input.is_action_just_released("shoot"):
 					item_uses -= 1
@@ -166,6 +170,7 @@ func _physics_process(delta: float) -> void:
 					sh_controller.handle_grapple(delta)
 					
 				if item_uses == 0:
+					sh_controller.equipped_stickyhand.visible = false
 					equipped = items.FIST
 		
 				sh_controller.update_rope()

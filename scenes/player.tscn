@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cbcsaqa08rnq3"]
+[gd_scene load_steps=19 format=3 uid="uid://cbcsaqa08rnq3"]
 
 [ext_resource type="Texture2D" uid="uid://d38inaf4yhtfe" path="res://assets/goofy.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://chvc3jetbh6ws" path="res://scripts/player.gd" id="1_g2els"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bs6cc2tumftx8" path="res://scenes/equipped_boomerang.tscn" id="6_smehm"]
 [ext_resource type="PackedScene" uid="uid://bjneyvtcrtc4a" path="res://scenes/acceleration.tscn" id="7_d2wvv"]
 [ext_resource type="Script" uid="uid://b7riaurrvmjp0" path="res://scripts/fan_controller.gd" id="7_fjrip"]
+[ext_resource type="PackedScene" uid="uid://3kkav56ht2f6" path="res://scenes/equipped_stickyhand.tscn" id="8_3v2ag"]
 [ext_resource type="Script" uid="uid://y3uic4h0voju" path="res://scripts/boomerang_controller.gd" id="9_ur7pv"]
 [ext_resource type="PackedScene" uid="uid://cqvwihf2m3fou" path="res://scenes/throw_boomerang.tscn" id="10_y4r1p"]
 
@@ -139,7 +140,7 @@ theme_override_font_sizes/font_size = 32
 text = "Uses: "
 
 [node name="equipped_fan" parent="Head/Camera" instance=ExtResource("5_smehm")]
-transform = Transform3D(0.08801055, 0.4430363, -0.892173, 0.8789369, 0.38692906, 0.27884644, 0.4687467, -0.8087056, -0.35534713, 0.6160296, -0.4170484, -0.68629694)
+transform = Transform3D(0.08801055, 0.4430363, -0.89217293, 0.8789369, 0.38692906, 0.27884644, 0.4687467, -0.8087056, -0.3553471, 0.6160296, -0.4170484, -0.68629694)
 visible = false
 
 [node name="Animation" type="AnimationPlayer" parent="Head/Camera/equipped_fan"]
@@ -158,10 +159,14 @@ amount = 20
 amount_ratio = 0.1683
 speed_scale = 0.75
 
+[node name="equipped_stickyhand" parent="Head/Camera" instance=ExtResource("8_3v2ag")]
+transform = Transform3D(0.725, 0, 0, 0, 1, 0, 0, 0, 1, 0.92, -0.98, -0.39)
+
 [node name="Coyote_Timer" type="Timer" parent="."]
 
-[node name="StickyHandController" type="Node" parent="." node_paths=PackedStringArray("ray", "rope")]
+[node name="StickyHandController" type="Node" parent="." node_paths=PackedStringArray("equipped_stickyhand", "ray", "rope")]
 script = ExtResource("5_tuyoq")
+equipped_stickyhand = NodePath("../Head/Camera/equipped_stickyhand")
 ray = NodePath("../Head/Camera/Aim")
 rope = NodePath("../Head/Camera/Rope")
 

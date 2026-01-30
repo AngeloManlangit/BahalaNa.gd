@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpvvi4yo2i3tk"]
+[gd_scene load_steps=4 format=3 uid="uid://dpvvi4yo2i3tk"]
+
+[ext_resource type="PackedScene" uid="uid://cfgq8lvm3sep7" path="res://items/weapons/stickyhand_alone.glb" id="1_vwx2k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm6nt"]
 albedo_color = Color(0.26453155, 0.6452792, 1.92523e-07, 1)
@@ -14,3 +16,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
 mesh = SubResource("CylinderMesh_pm6nt")
+
+[node name="stickyhand_alone" parent="." instance=ExtResource("1_vwx2k")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.17385814, -2.0124633)

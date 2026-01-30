@@ -1,5 +1,7 @@
 extends Node
 
+@export var equipped_stickyhand: Node3D
+
 @export var ray: RayCast3D
 @export var rope: Node3D
 
@@ -13,10 +15,12 @@ var launched: bool = false
 	
 func launch_hand():	
 	if ray.is_colliding():
+		equipped_stickyhand.visible = false
 		target = ray.get_collision_point()
 		launched = true
 
 func retract_hand():
+	equipped_stickyhand.visible = true
 	player.allow_input = true
 	launched = false
 	
