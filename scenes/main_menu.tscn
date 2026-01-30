@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3novdrrtxqa5" path="res://scripts/UI/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://c886tvmt67tma" path="res://assets/UI/MainMenuBG.png" id="2_8ln24"]
 [ext_resource type="FontFile" uid="uid://w7rdx0xfxjxp" path="res://assets/fonts/ZeroCool/ZeroCool.ttf" id="3_rtw2f"]
-[ext_resource type="PackedScene" uid="uid://byu2rv0sojnrm" path="res://scenes/loading.tscn" id="4_wu84c"]
+[ext_resource type="PackedScene" uid="uid://byu2rv0sojnrm" path="res://scenes/UI/loading.tscn" id="4_wu84c"]
 [ext_resource type="Texture2D" uid="uid://bye4k0636mrv6" path="res://assets/UI/ye.svg" id="5_oa1go"]
 [ext_resource type="PackedScene" uid="uid://dvv1nax1yqlrh" path="res://items/weapons/boomerang.tscn" id="6_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://4j54mu060wld" path="res://items/weapons/handfan.tscn" id="7_tbmy8"]
@@ -54,6 +54,21 @@ shadow_offset = Vector2(1.22, 0)
 
 [sub_resource type="Environment" id="Environment_rtw2f"]
 
+[sub_resource type="Animation" id="Animation_tbmy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -2.0594885, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_oa1go"]
 resource_name = "spin"
 length = 3.0
@@ -70,21 +85,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -6.2831855, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_tbmy8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -2.0594885, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jk1qb"]

@@ -56,8 +56,12 @@ var aim_direction
 # sticky hand
 @onready var sh_controller: Node = $StickyHandController
 
-# UI
-@onready var uses_label: Label = $Head/Camera/Temp_UI/Uses
+# crosshair
+@onready var crosshair: TextureRect = $UI/Crosshair
+const FIST_CROSSHAIR = preload("uid://dpw7b4yqx7rjp")
+const FAN_CROSSHAIR = preload("uid://v8o1xn3wr7eh")
+const BOOMER_CROSSHAIR = preload("uid://6303bouukwux")
+const HAND_CROSSHAIR = preload("uid://yanse4y6h85l")
 
 func _ready():
 	capture_mouse()
@@ -65,6 +69,7 @@ func _ready():
 	boomerang_controller.equipped_boomerang.visible = false
 	sh_controller.equipped_stickyhand.visible = false
 	sh_controller.rope.visible = false
+	crosshair.texture = FIST_CROSSHAIR
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -78,7 +83,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 		
 func _process(delta: float) -> void:
-	uses_label.text = "Uses: " + str(item_uses)
 	if shake_strength > 0:
 		shake_strength = lerp(shake_strength, 0.0, shake_decay * delta)
 		
@@ -161,6 +165,7 @@ func _physics_process(delta: float) -> void:
 						if item_uses == 0:
 							fan_controller.equipped_fan.visible = false
 							equipped = items.FIST
+							crosshair.texture = FIST_CROSSHAIR
 			items.BOOMERANG:
 				# Boomerang logic
 				boomerang_controller.equipped_boomerang.visible = true
@@ -172,14 +177,19 @@ func _physics_process(delta: float) -> void:
 				if item_uses == 0 && boomerang_controller.returned:
 					boomerang_controller.equipped_boomerang.visible = false
 					equipped = items.FIST
+					crosshair.texture = FIST_CROSSHAIR
 			items.STICKY_HAND:
 				# sticky hand logic
 				sh_controller.equipped_stickyhand.visible = true
-				if Input.is_action_just_pressed("shoot"):
-					allow_input = false
-					sh_controller.launch_hand()
+				if item_aim.is_colliding():
+					crosshair.modulate = Color.GREEN
+					if Input.is_action_just_pressed("shoot"):
+						crosshair.modulate = Color.BLACK
+						allow_input = false
+						sh_controller.launch_hand()
 				
 				if Input.is_action_pressed("shoot"):
+					crosshair.modulate = Color.BLACK
 					sh_controller.equipped_stickyhand.visible = false
 				
 				if Input.is_action_just_released("shoot"):
@@ -192,6 +202,7 @@ func _physics_process(delta: float) -> void:
 				if item_uses == 0:
 					sh_controller.equipped_stickyhand.visible = false
 					equipped = items.FIST
+					crosshair.texture = FIST_CROSSHAIR
 		
 				sh_controller.update_rope()
 	
@@ -239,12 +250,16 @@ func pickup(picked_up_item: String):
 			sh_controller.hide_self()
 	
 	if picked_up_item == "FAN":
+		crosshair.texture = FAN_CROSSHAIR
 		equipped = items.FAN
 		item_uses = 5
 	elif picked_up_item == "BOOMERANG":
+		crosshair.texture = BOOMER_CROSSHAIR
 		equipped = items.BOOMERANG
 		item_uses = 3
 	elif picked_up_item == "STICKY_HAND":
+		crosshair.texture = HAND_CROSSHAIR
+		crosshair.modulate = Color.BLACK
 		equipped = items.STICKY_HAND
 		item_uses = 2
 
