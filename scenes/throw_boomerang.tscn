@@ -47,7 +47,7 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_bfqc7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bfqc7"]
-size = Vector3(4.3031616, 0.4741211, 4.380371)
+size = Vector3(2.592041, 0.28692627, 2.4106445)
 
 [node name="Throw_Boomerang" type="Node3D" node_paths=PackedStringArray("shape_cast", "timer")]
 script = ExtResource("1_bfqc7")
@@ -84,11 +84,11 @@ margin = 0.04
 max_results = 1
 
 [node name="Attack Area" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Area"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49935913, -0.26293945, -0.26391602)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0052490234, -0.01272583, -0.03173828)
 shape = SubResource("BoxShape3D_bfqc7")
-
-[connection signal="body_entered" from="Attack Area" to="." method="_on_attack_area_body_entered"]
 
 [editable path="boomerang"]

@@ -32,10 +32,10 @@ func _ready():
 
 func _on_start_pressed() -> void:
 	print("Start Pressed")
-	loading.load_scene("res://scenes/game.tscn")
+	loading.load_scene("res://scenes/level.tscn")
 
 func _on_options_pressed() -> void:
-	print("Options Pressed")
+	loading.load_scene("res://scenes/level_enemy.tscn")
 
 func _on_exit_pressed() -> void:
 	print("Exit Pressed")

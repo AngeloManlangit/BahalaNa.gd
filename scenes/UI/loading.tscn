@@ -621,18 +621,18 @@ grow_vertical = 2
 script = ExtResource("1_dhqfv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(640, 360)
-scale = Vector2(0.68, 0.68)
+position = Vector2(966.93335, 543.9)
+scale = Vector2(1.0205555, 1.0205555)
 sprite_frames = SubResource("SpriteFrames_0d5ba")
 autoplay = "default"
 frame_progress = 0.7366207
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = 851.0
-offset_top = 269.0
-offset_right = 1363.0
-offset_bottom = 781.0
+offset_left = 1433.0
+offset_top = 576.0
+offset_right = 1945.0
+offset_bottom = 1088.0
 scale = Vector2(1.195, 1.195)
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
@@ -641,6 +641,41 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="Loading_Run" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ir5ef")]
+
+[node name="Skeleton3D" parent="SubViewportContainer/SubViewport/Loading_Run" index="0"]
+bones/0/position = Vector3(0.008490408, 0.68620104, -0.045361355)
+bones/0/rotation = Quaternion(0.1795389, 0.07438669, -0.05551428, 0.97936237)
+bones/1/rotation = Quaternion(0.09958818, -0.12829305, 0.04742129, 0.98558325)
+bones/2/rotation = Quaternion(0.0065826066, -0.035948306, 0.0032808823, 0.99932665)
+bones/3/rotation = Quaternion(0.0066541545, -0.03593634, 0.0030856887, 0.9993272)
+bones/4/rotation = Quaternion(-0.05713624, -0.001726465, 0.01909785, 0.9981823)
+bones/5/rotation = Quaternion(-0.17484602, 0.080991395, 0.07301297, 0.9785389)
+bones/7/rotation = Quaternion(0.68601066, 0.25723743, -0.6216302, 0.27711767)
+bones/8/rotation = Quaternion(-0.07379373, -0.09577332, 0.26706156, 0.95606494)
+bones/9/rotation = Quaternion(-0.01038455, 0.00063569465, 0.7749288, 0.6319629)
+bones/10/rotation = Quaternion(-0.2764653, 0.10305348, 0.27042696, 0.91641486)
+bones/12/rotation = Quaternion(0.13187388, -0.061240382, -0.23271033, 0.9616158)
+bones/13/rotation = Quaternion(-0.28237092, 0.24828553, 0.34157255, 0.86136466)
+bones/15/rotation = Quaternion(0.13095121, 0.036142867, 0.06860333, 0.98835176)
+bones/16/rotation = Quaternion(0.66120577, 0.0021402764, -0.06639071, 0.74725807)
+bones/17/rotation = Quaternion(0.2765822, 0.00046713924, -0.017647956, 0.9608281)
+bones/19/rotation = Quaternion(0.6753292, -0.27363157, 0.6222826, 0.28604302)
+bones/20/rotation = Quaternion(0.0154918255, -0.31973797, 0.39408493, 0.8615247)
+bones/21/rotation = Quaternion(-0.01003903, -0.0004924871, -0.67200834, 0.74047536)
+bones/22/rotation = Quaternion(-0.0011962943, -0.06918496, 0.009341422, 0.99755937)
+bones/24/rotation = Quaternion(0.10415681, -0.004943613, 0.3022897, 0.94749564)
+bones/25/rotation = Quaternion(-0.07780012, 0.05113484, -0.151967, 0.9839911)
+bones/27/rotation = Quaternion(0.50678664, 0.015566827, -0.019530915, 0.8617098)
+bones/28/rotation = Quaternion(0.49832964, -0.0028690514, 0.027930848, 0.8665329)
+bones/29/rotation = Quaternion(0.3008383, 0.00082676206, 0.002816304, 0.95367074)
+bones/31/rotation = Quaternion(0.06332483, 0.05595071, 0.9884797, -0.12556884)
+bones/32/rotation = Quaternion(-0.30822, 0.00379781, 0.019234074, 0.95111305)
+bones/33/rotation = Quaternion(0.43908772, -0.097906455, -0.046659064, 0.89187413)
+bones/34/rotation = Quaternion(0.6321304, -0.19380149, -0.034299828, 0.7494503)
+bones/36/rotation = Quaternion(-0.01874728, 0.73641956, 0.6761958, -0.009697877)
+bones/37/rotation = Quaternion(-0.817623, -0.009977003, 0.041694645, 0.5741556)
+bones/38/rotation = Quaternion(0.43586668, 0.07565032, 0.0067481017, 0.8968009)
+bones/39/rotation = Quaternion(0.37127778, 0.09835173, -0.043318853, 0.9222816)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.8182168, 0.645, 0)
@@ -652,9 +687,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -640.0
+offset_left = -965.0
 offset_top = -22.0
-offset_right = 640.0
+offset_right = 959.0
 grow_horizontal = 2
 grow_vertical = 0
 show_percentage = false

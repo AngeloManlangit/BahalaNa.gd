@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ixvfas8qns3k"]
+
+[ext_resource type="PackedScene" uid="uid://3yjikwiq0van" path="res://assets/Dying.fbx" id="1_fhtk7"]
+
+[node name="Dying" instance=ExtResource("1_fhtk7")]

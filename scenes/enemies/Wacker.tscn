@@ -971,6 +971,8 @@ radius = 8.47119
 
 [node name="Wacker" type="CharacterBody3D" node_paths=PackedStringArray("animationPlayer") groups=["enemy"]]
 transform = Transform3D(0.952717, 0, 0, 0, 0.952717, 0, 0, 0, 0.952717, 0, 0, 0)
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_s7bn3")
 animationPlayer = NodePath("Wacker/AnimationPlayer")
 
@@ -1222,6 +1224,7 @@ transform = Transform3D(1.54848, 0, 0, 0, 1.54848, 0, 0, 0, 1.54848, 0.0754531, 
 shape = SubResource("CapsuleShape3D_s7bn3")
 
 [node name="Attack Area" type="Area3D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Attack Area"]
@@ -1229,6 +1232,7 @@ transform = Transform3D(1.07882, 0, 0, 0, 1.07882, 0, 0, 0, 1.07882, 0, 1.50257,
 shape = SubResource("CylinderShape3D_s7bn3")
 
 [node name="Detect Area" type="Area3D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Detect Area"]

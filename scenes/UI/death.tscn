@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=3 uid="uid://mvua74e4asfi"]
+
+[ext_resource type="FontFile" uid="uid://bemhpbmyncfmp" path="res://assets/fonts/Digitag/Digitag.ttf" id="1_8uk24"]
+[ext_resource type="FontFile" uid="uid://w7rdx0xfxjxp" path="res://assets/fonts/ZeroCool/ZeroCool.ttf" id="2_nh7ut"]
+[ext_resource type="PackedScene" uid="uid://ixvfas8qns3k" path="res://scenes/UI/dying.tscn" id="3_328fe"]
+
+[sub_resource type="GDScript" id="GDScript_nh7ut"]
+script/source = "extends Control
+
+@onready var animation_player: AnimationPlayer = $SubViewportContainer/SubViewport/Dying/AnimationPlayer
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiqym"]
+bg_color = Color(0.86, 0.07166665, 0, 0.5294118)
+
+[node name="Death" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_nh7ut")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iiqym")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 15.0
+offset_right = 1899.0
+offset_bottom = 640.0
+theme_override_colors/font_color = Color(0.18, 0.0378, 0.0378, 1)
+theme_override_fonts/font = ExtResource("1_8uk24")
+theme_override_font_sizes/font_size = 600
+text = "YOU DIED"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1008.0
+offset_top = 846.0
+offset_right = 1478.0
+offset_bottom = 904.0
+theme_override_fonts/font = ExtResource("2_nh7ut")
+theme_override_font_sizes/font_size = 50
+text = "PRESS F TO RESTART"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 306.0
+offset_right = 820.0
+offset_bottom = 818.0
+scale = Vector2(1.5, 1.5)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Dying" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_328fe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.55, -1.322)
+
+[node name="Skeleton3D" parent="SubViewportContainer/SubViewport/Dying" index="0"]
+bones/0/position = Vector3(-0.27982256, 0.10429543, 0.029660674)
+bones/0/rotation = Quaternion(0.6369685, -0.1276236, 0.18679339, 0.7369475)
+bones/1/rotation = Quaternion(0.021755936, -0.0063212863, 0.035004992, 0.9991303)
+bones/2/rotation = Quaternion(0.038691107, -0.009356296, 0.033447187, 0.99864745)
+bones/3/rotation = Quaternion(0.03876974, -0.009019399, 0.033448134, 0.99864745)
+bones/4/rotation = Quaternion(0.049247954, -0.09953031, 0.04653068, 0.99272525)
+bones/5/rotation = Quaternion(-0.3206502, -0.4657299, 0.058262594, 0.82272995)
+bones/7/rotation = Quaternion(0.6017483, 0.34987003, -0.63615483, 0.3328618)
+bones/8/rotation = Quaternion(0.00882034, -0.72654873, 0.2664284, 0.633297)
+bones/9/rotation = Quaternion(0.016041227, 2.506375e-05, 0.7270832, 0.6863619)
+bones/10/rotation = Quaternion(-0.0027179243, 0.07729731, -0.04086034, 0.99616677)
+bones/11/rotation = Quaternion(0.16441756, 0.047079112, 0.21098508, 0.96241146)
+bones/12/rotation = Quaternion(0.011394668, -8.7846536e-05, -0.049136415, 0.9987271)
+bones/13/rotation = Quaternion(-0.021061154, 0.0025662777, -0.017764641, 0.9996171)
+bones/15/rotation = Quaternion(0.0018001404, 0.0014499793, 0.0049458565, 0.9999851)
+bones/16/rotation = Quaternion(-2.9802322e-07, 4.242093e-05, -0.009322944, 0.9999566)
+bones/17/rotation = Quaternion(-5.662442e-07, 0.00013264165, 0.0024791514, 0.999997)
+bones/19/rotation = Quaternion(0.62735546, -0.28970847, 0.6729855, 0.26378912)
+bones/20/rotation = Quaternion(0.18074769, 0.69036424, 0.021165613, 0.70019966)
+bones/21/rotation = Quaternion(-0.03581104, -0.0004954413, -0.9479185, 0.31649318)
+bones/22/rotation = Quaternion(-0.048254542, 0.22930583, 0.084617585, 0.968468)
+bones/23/rotation = Quaternion(0.16596939, -0.041936424, -0.23469496, 0.9568772)
+bones/24/rotation = Quaternion(0.016419666, -0.0013641223, 0.08657654, 0.996109)
+bones/25/rotation = Quaternion(-0.021411654, 0.00048438512, 0.039298188, 0.99899805)
+bones/27/rotation = Quaternion(0.0021835268, -0.0029724345, 0.00055893615, 0.9999931)
+bones/28/rotation = Quaternion(5.2526593e-07, 0.00014422218, 0.0029351157, 0.9999957)
+bones/29/rotation = Quaternion(-4.172325e-07, 0.00021465437, -0.008966431, 0.9999598)
+bones/31/rotation = Quaternion(0.36223614, 0.28454757, 0.8334475, -0.30525908)
+bones/32/rotation = Quaternion(-0.57097065, 0.0043589994, -0.1097735, 0.8135868)
+bones/33/rotation = Quaternion(0.37673283, 0.118919, -0.07550886, 0.91554844)
+bones/34/rotation = Quaternion(0.12247423, -0.018129459, -0.061414786, 0.9904038)
+bones/36/rotation = Quaternion(-0.13088542, 0.03448091, 0.9607363, 0.24221066)
+bones/37/rotation = Quaternion(-0.21204172, -0.004107923, -0.059289627, 0.9754519)
+bones/38/rotation = Quaternion(0.39782572, -0.11197961, 0.042451397, 0.9096116)
+bones/39/rotation = Quaternion(0.2333552, -0.005622924, 0.04508054, 0.9713298)
+
+[editable path="SubViewportContainer/SubViewport/Dying"]

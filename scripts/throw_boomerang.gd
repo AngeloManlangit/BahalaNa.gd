@@ -17,8 +17,7 @@ func jumpable():
 func unjumpable():
 	csg_box_3d.use_collision = false
 
-
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemy"):
 		target = body
-		target.take_damage()
+		target.take_damage()	

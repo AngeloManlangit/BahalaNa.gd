@@ -5,7 +5,7 @@ var health_points = 2 # default: 2
 var item_uses = 5 # default: 5
 
 # on screen damage overlay
-@onready var damage_overlay: ColorRect = $Head/CanvasLayer/damage_overlay
+@onready var damage_overlay: ColorRect = $UI/damage_overlay
 @onready var rng = RandomNumberGenerator.new()
 
 @export var fall_shake_threshold: float = -12.0 
@@ -15,7 +15,7 @@ var shake_strength: float = 0.0
 var shake_decay: float = 5.0
 
 # movement variables
-const SPEED = 7.0
+const SPEED = 10.0
 const JUMP_VELOCITY = 6.0
 const MOUSE_SENSITIVITY = 0.005
 const weight = 7.0
@@ -63,13 +63,20 @@ const FAN_CROSSHAIR = preload("uid://v8o1xn3wr7eh")
 const BOOMER_CROSSHAIR = preload("uid://6303bouukwux")
 const HAND_CROSSHAIR = preload("uid://yanse4y6h85l")
 
+@onready var uses: Label = $UI/Uses
+
+@onready var death: Control = $UI/Death
+@onready var animation_player: AnimationPlayer = $UI/Death/SubViewportContainer/SubViewport/Dying/AnimationPlayer
+
 func _ready():
 	capture_mouse()
+	damage_overlay.visible = false
 	fan_controller.equipped_fan.visible = false
 	boomerang_controller.equipped_boomerang.visible = false
 	sh_controller.equipped_stickyhand.visible = false
 	sh_controller.rope.visible = false
 	crosshair.texture = FIST_CROSSHAIR
+	death.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -181,23 +188,24 @@ func _physics_process(delta: float) -> void:
 			items.STICKY_HAND:
 				# sticky hand logic
 				sh_controller.equipped_stickyhand.visible = true
-				if item_aim.is_colliding():
+				crosshair.modulate = Color.BLACK
+				if item_aim.is_colliding() || sh_controller.launched:
 					crosshair.modulate = Color.GREEN
 					if Input.is_action_just_pressed("shoot"):
 						crosshair.modulate = Color.BLACK
 						allow_input = false
 						sh_controller.launch_hand()
-				
-				if Input.is_action_pressed("shoot"):
-					crosshair.modulate = Color.BLACK
-					sh_controller.equipped_stickyhand.visible = false
-				
-				if Input.is_action_just_released("shoot"):
-					item_uses -= 1
-					sh_controller.retract_hand()
-	
-				if sh_controller.launched:
-					sh_controller.handle_grapple(delta)
+					
+					if Input.is_action_pressed("shoot"):
+						crosshair.modulate = Color.BLACK
+						sh_controller.equipped_stickyhand.visible = false
+					
+					if Input.is_action_just_released("shoot"):
+						item_uses -= 1
+						sh_controller.retract_hand()
+		
+					if sh_controller.launched:
+						sh_controller.handle_grapple(delta)
 					
 				if item_uses == 0:
 					sh_controller.equipped_stickyhand.visible = false
@@ -211,7 +219,11 @@ func _physics_process(delta: float) -> void:
 		boomerang_controller.throw(delta)
 		
 	var last_y_velocity = velocity.y
-		
+	
+	uses.text = str(item_uses)
+	if equipped == items.FIST:
+		uses.text = "∞"
+	
 	move_and_slide()
 	
 	if is_on_floor() and last_y_velocity < fall_shake_threshold:
@@ -252,14 +264,13 @@ func pickup(picked_up_item: String):
 	if picked_up_item == "FAN":
 		crosshair.texture = FAN_CROSSHAIR
 		equipped = items.FAN
-		item_uses = 5
+		item_uses = 6
 	elif picked_up_item == "BOOMERANG":
 		crosshair.texture = BOOMER_CROSSHAIR
 		equipped = items.BOOMERANG
-		item_uses = 3
+		item_uses = 5
 	elif picked_up_item == "STICKY_HAND":
 		crosshair.texture = HAND_CROSSHAIR
-		crosshair.modulate = Color.BLACK
 		equipped = items.STICKY_HAND
 		item_uses = 2
 
@@ -273,13 +284,17 @@ func take_damage():
 		health_points -= 1
 		
 		# trigger Screen Shake
+		damage_overlay.visible = true
 		shake_strength = 0.5 # adjust for more violent shake
 		
 		# update Visuals
 		update_blood_overlay()
 		
 		if health_points <= 0:
-			die()
+			allow_input = false
+			mouse_captured = false
+			death.visible = true
+			animation_player.play("mixamo_com")
 			
 func update_blood_overlay():
 	if !damage_overlay: return
@@ -300,13 +315,9 @@ func update_blood_overlay():
 		tween.tween_property(mat, "shader_parameter/radius", 0.7, 0.5)
 		tween.tween_property(mat, "shader_parameter/effect_strength", 0.6, 0.5)
 		tween.tween_property(mat, "shader_parameter/pulse_speed", 5.0, 0.5)
-		
+	
 	elif health_points <= 0:
 		# dead: turn screen black
 		tween.tween_property(mat, "shader_parameter/vignette_color", Color(0.0, 0.0, 0.0), 0.2)
 		tween.tween_property(mat, "shader_parameter/radius", 0.4, 0.5)
-		tween.tween_property(mat, "shader_parameter/effect_strength", 1, 0.2)
-
-func die():
-	print("Player Died")
-	# Add your game over logic here
+		tween.tween_property(mat, "shader_parameter/effect_strength", 0.8, 0.2)

@@ -54,14 +54,12 @@ size = Vector3(1.2001953, 3.225586, 1.0585938)
 [node name="Game" type="Node3D"]
 
 [node name="Wacker" parent="." instance=ExtResource("1_gee14")]
-collision_mask = 2
 
 [node name="Taser" parent="." instance=ExtResource("2_vtaks")]
 transform = Transform3D(1.3741655, 0, 0, 0, 1.3741655, 0, 0, 0, 1.3741655, 8.990853, 0, 1.6053858)
-collision_mask = 2
 
 [node name="Blocker" parent="." instance=ExtResource("3_kvpfn")]
-transform = Transform3D(0.49893913, 0, 0, 0, 0.49893913, 0, 0, 0, 0.49893913, 2.8463125, 0, 0)
+transform = Transform3D(0.49893913, 0, 0, 0, 0.49893913, 0, 0, 0, 0.49893913, 2.8463125, 0, -11.520582)
 collision_mask = 2
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
