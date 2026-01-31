@@ -30,8 +30,8 @@ How to make a Video Game - Godot Beginner Tutorial - https://youtu.be/LOhfqjmasi
 How to make 3D Games in Godot - https://youtu.be/ke5KpqcoiIU?si=H4fQjLnP8lv6Zt8-
   
 **Links**
-Google Drive - BahalaNa.gd
-Github Repository
+Google Drive - BahalaNa.gd - https://drive.google.com/drive/u/1/folders/1K0NhenEjAKIbljAXvp4kNzY6Pm8DISaZ
+Github Repository - https://github.com/AngeloManlangit/BahalaNa.gd
 
 **How To Use**
 Open the Project: Clone the repository and open project.godot using Godot Engine 4.5.
