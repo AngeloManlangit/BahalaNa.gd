@@ -1,7 +1,7 @@
 [gd_scene load_steps=66 format=4 uid="uid://dyqrdffph4d2t"]
 
 [ext_resource type="AnimationLibrary" uid="uid://c4ct6lpoaxswe" path="res://assets/Enemies/Blocker/idle.res" id="1_hsomh"]
-[ext_resource type="Script" path="res://scripts/blocker.gd" id="1_kpc78"]
+[ext_resource type="Script" uid="uid://cgjj7oomkya8p" path="res://scripts/blocker.gd" id="1_kpc78"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhvhv"]
 resource_name = "Material.006"
@@ -1830,9 +1830,10 @@ radius = 2.74854
 height = 1.07434
 radius = 8.47119
 
-[node name="Blocker" type="CharacterBody3D" groups=["enemy"]]
+[node name="Blocker" type="CharacterBody3D" node_paths=PackedStringArray("animationPlayer") groups=["enemy"]]
 transform = Transform3D(0.251706, 0, 0, 0, 0.251706, 0, 0, 0, 0.251706, 0, 0, 0)
 script = ExtResource("1_kpc78")
+animationPlayer = NodePath("Model/AnimationPlayer")
 
 [node name="Model" type="Node3D" parent="."]
 

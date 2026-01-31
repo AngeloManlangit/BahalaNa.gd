@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cmkq2g1sdb6fn"]
 
-[ext_resource type="Script" path="res://scripts/taser.gd" id="1_uysar"]
+[ext_resource type="Script" uid="uid://bkkyi24poelow" path="res://scripts/taser.gd" id="1_uysar"]
 [ext_resource type="PackedScene" uid="uid://b3thkd7lrxt3u" path="res://assets/Enemies/Taser/finaler256.fbx" id="2_mw2jf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bxi8a"]
@@ -17,7 +17,7 @@ radius = 3.87848
 transparency = 1
 albedo_color = Color(0.98, 0, 0, 0.509804)
 
-[node name="Taser" type="CharacterBody3D"]
+[node name="Taser" type="CharacterBody3D" groups=["enemy"]]
 script = ExtResource("1_uysar")
 
 [node name="TaserModel" parent="." instance=ExtResource("2_mw2jf")]
