@@ -103,8 +103,8 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="MainMenuBg" type="Sprite2D" parent="."]
-position = Vector2(640, 360)
-scale = Vector2(0.67685187, 0.67685187)
+position = Vector2(971.1111, 546.25)
+scale = Vector2(1.0217593, 1.0217593)
 texture = ExtResource("2_8ln24")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -112,10 +112,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 34.53
-offset_top = -100.994995
-offset_right = 539.0
-offset_bottom = 130.0
+offset_left = 50.0
+offset_top = -140.0
+offset_right = 844.9418
+offset_bottom = 224.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -132,7 +132,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "START"
+text = "NORMAL"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -146,7 +146,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l6cm7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
-text = "CREDITS"
+text = "HARD MODE!!!"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -163,22 +163,22 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_wu84c")
 text = "Exit ;_;"
 
 [node name="Ye" type="Sprite2D" parent="."]
-position = Vector2(277.00003, 132)
-scale = Vector2(0.7809522, 0.78095233)
+position = Vector2(437, 197)
+scale = Vector2(1.233333, 1.2333332)
 texture = ExtResource("5_oa1go")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
-offset_left = 652.0
-offset_top = 84.0
-offset_right = 1256.0
-offset_bottom = 652.0
+offset_left = 993.0
+offset_top = 227.0
+offset_right = 1762.8875
+offset_bottom = 951.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(604, 568)
+size = Vector2i(769, 724)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]

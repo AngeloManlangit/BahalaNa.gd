@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://c6d80q216dy12"
-path="res://.godot/imported/Happy Idle.fbx-aa7020e80d1e56e1120649dc80ea4faf.scn"
+path="res://.godot/imported/Happy Idle.fbx-aa7020e80d1e56e1120649dc80ea4faf.res"
 
 [deps]
 
 source_file="res://assets/Enemies/Taser/Happy Idle.fbx"
-dest_files=["res://.godot/imported/Happy Idle.fbx-aa7020e80d1e56e1120649dc80ea4faf.scn"]
+dest_files=["res://.godot/imported/Happy Idle.fbx-aa7020e80d1e56e1120649dc80ea4faf.res"]
 
 [params]
 

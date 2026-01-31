@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://b7ca7g3qa4llb"
-path="res://.godot/imported/Injured Stumble Idle.fbx-4ed7aa2e9fd2a06886368bcb2171a603.scn"
+path="res://.godot/imported/Injured Stumble Idle.fbx-4ed7aa2e9fd2a06886368bcb2171a603.res"
 
 [deps]
 
 source_file="res://assets/Enemies/Taser/Injured Stumble Idle.fbx"
-dest_files=["res://.godot/imported/Injured Stumble Idle.fbx-4ed7aa2e9fd2a06886368bcb2171a603.scn"]
+dest_files=["res://.godot/imported/Injured Stumble Idle.fbx-4ed7aa2e9fd2a06886368bcb2171a603.res"]
 
 [params]
 

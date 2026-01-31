@@ -4,6 +4,7 @@ const SPEED = 30.0
 
 @onready var windslash: Node3D = $windslash
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
+var target = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,3 +25,9 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	queue_free()
+
+
+func _on_attack_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("enemy"):
+		target = body
+		target.take_damage()

@@ -21,16 +21,18 @@ func _physics_process(delta: float) -> void:
 	if state == States.idle and active == true:
 		if look == true:
 			look_at(Vector3(target.global_position.x, global_position.y, target.global_position.z), Vector3.UP, true)
-			
+		animationPlayer.play("idle")	
 		velocity = Vector3.ZERO
 		
 	
 	elif state == States.attacks and active == true:
 		velocity = Vector3.ZERO
+		animationPlayer.play("attack/mixamo_com")
 		look_at(Vector3(target.global_position.x, global_position.y, target.global_position.z), Vector3.UP, true)
 		
 	elif state == States.die and active == true:
 		velocity = Vector3.ZERO
+		animationPlayer.play("shutdown/mixamo_com")
 		active = false
 		
 
