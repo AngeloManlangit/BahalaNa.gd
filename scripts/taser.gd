@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y = gravity * delta
 	if state == States.idle and active == true:
+		animationPlayer.play("Happy Idle/mixamo_com")
 		if look == true:
 			look_at(Vector3(target.global_position.x, global_position.y, target.global_position.z), Vector3.UP, true)
 		velocity = Vector3.ZERO
@@ -40,11 +41,13 @@ func _physics_process(delta: float) -> void:
 		
 	elif state == States.die and active == true:
 		velocity = Vector3.ZERO
+		animationPlayer.play("shutdown/mixamo_com")
 		active = false
 		
 func handle_shooting_cycle():
 	is_shooting = true  # LOCK: No more shots can start until this is false
 	laser_mesh.visible = true
+	animationPlayer.play("attack/mixamo_com")
 	timer.start(0.75)
 	await timer.timeout
 	

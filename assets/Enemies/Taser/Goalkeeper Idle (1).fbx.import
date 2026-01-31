@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://b3jo2fruohx55"
-path="res://.godot/imported/Goalkeeper Idle (1).fbx-33e38862b592111bc92e92d32015f509.scn"
+path="res://.godot/imported/Goalkeeper Idle (1).fbx-33e38862b592111bc92e92d32015f509.res"
 
 [deps]
 
 source_file="res://assets/Enemies/Taser/Goalkeeper Idle (1).fbx"
-dest_files=["res://.godot/imported/Goalkeeper Idle (1).fbx-33e38862b592111bc92e92d32015f509.scn"]
+dest_files=["res://.godot/imported/Goalkeeper Idle (1).fbx-33e38862b592111bc92e92d32015f509.res"]
 
 [params]
 

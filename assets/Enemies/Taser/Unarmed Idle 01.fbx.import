@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://vld5fp5jfu3f"
-path="res://.godot/imported/Unarmed Idle 01.fbx-e2bd06adb100bc71f4d61327e560922c.scn"
+path="res://.godot/imported/Unarmed Idle 01.fbx-e2bd06adb100bc71f4d61327e560922c.res"
 
 [deps]
 
 source_file="res://assets/Enemies/Taser/Unarmed Idle 01.fbx"
-dest_files=["res://.godot/imported/Unarmed Idle 01.fbx-e2bd06adb100bc71f4d61327e560922c.scn"]
+dest_files=["res://.godot/imported/Unarmed Idle 01.fbx-e2bd06adb100bc71f4d61327e560922c.res"]
 
 [params]
 

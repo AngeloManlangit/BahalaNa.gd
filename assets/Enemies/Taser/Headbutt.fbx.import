@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://rhywedt2fu4u"
-path="res://.godot/imported/Headbutt.fbx-436ffb5010b9881f300a275ac1e5eebf.scn"
+path="res://.godot/imported/Headbutt.fbx-436ffb5010b9881f300a275ac1e5eebf.res"
 
 [deps]
 
 source_file="res://assets/Enemies/Taser/Headbutt.fbx"
-dest_files=["res://.godot/imported/Headbutt.fbx-436ffb5010b9881f300a275ac1e5eebf.scn"]
+dest_files=["res://.godot/imported/Headbutt.fbx-436ffb5010b9881f300a275ac1e5eebf.res"]
 
 [params]
 
