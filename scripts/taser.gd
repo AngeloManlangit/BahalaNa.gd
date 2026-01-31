@@ -47,6 +47,7 @@ func _physics_process(delta: float) -> void:
 func handle_shooting_cycle():
 	is_shooting = true  # LOCK: No more shots can start until this is false
 	laser_mesh.visible = true
+	animationPlayer.play("attack/mixamo_com")
 	timer.start(0.75)
 	animationPlayer.play("attack/mixamo_com")
 	await timer.timeout
